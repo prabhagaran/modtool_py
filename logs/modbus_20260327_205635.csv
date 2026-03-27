@@ -1,0 +1,7 @@
+Timestamp,Direction,Frame,Parsed,Status
+20:56:35.268,INF,Session started – logs → logs\modbus_20260327_205635.*,,OK
+20:56:41.929,ERR,RTU connection failed → COM1,,ERROR
+20:56:47.766,INF,RTU connected → COM8  9600/N/1/8  slave=1,,OK
+20:57:14.022,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:57:14.023,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'unit',,ERROR
+20:58:33.594,INF,Disconnected,,OK

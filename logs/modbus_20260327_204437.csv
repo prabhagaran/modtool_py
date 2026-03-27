@@ -1,0 +1,44 @@
+Timestamp,Direction,Frame,Parsed,Status
+20:44:37.188,INF,Session started – logs → logs\modbus_20260327_204437.*,,OK
+20:44:48.652,INF,RTU connected → COM8  9600/N/1/8  slave=1,,OK
+20:46:21.023,TX,01 03 13 87 00 01 00 00,FC03 Read Holding Regs  addr=4999  qty=1,OK
+20:46:21.024,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:46:43.781,TX,01 03 13 87 00 02 00 00,FC03 Read Holding Regs  addr=4999  qty=2,OK
+20:46:43.782,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:46:56.357,TX,01 03 13 86 00 02 00 00,FC03 Read Holding Regs  addr=4998  qty=2,OK
+20:46:56.358,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:48:53.325,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:48:53.326,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:04.786,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:04.786,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:08.986,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:08.986,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:18.318,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:18.319,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:25.063,INF,Disconnected,,OK
+20:49:26.710,INF,RTU connected → COM8  9600/N/1/8  slave=1,,OK
+20:49:36.583,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:36.584,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:37.241,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:37.241,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:37.476,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:37.476,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:49:37.702,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:49:37.702,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:50:03.520,INF,Disconnected,,OK
+20:51:07.900,INF,RTU connected → COM8  9600/N/1/8  slave=1,,OK
+20:51:11.357,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:11.357,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:11.969,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:11.969,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:12.185,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:12.185,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:12.401,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:12.401,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:12.593,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:12.594,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:12.801,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:12.801,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:51:13.017,TX,01 03 13 A6 00 02 00 00,FC03 Read Holding Regs  addr=5030  qty=2,OK
+20:51:13.018,ERR,Unexpected error: ModbusClientMixin.read_holding_registers() got an unexpected keyword argument 'slave',,ERROR
+20:54:03.358,INF,Disconnected,,OK

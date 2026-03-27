@@ -1,0 +1,26 @@
+# ModTool Session Log – 20260327_205839
+================================================================================
+
+[20:58:39.118] [INF] Session started – logs → logs\modbus_20260327_205839.*
+[20:58:48.064] [INF] RTU connected → COM8  9600/N/1/8  slave=1
+[20:59:03.033] [TX ] 01 03 13 A6 00 02 00 00
+             → FC03 Read Holding Regs  addr=5030  qty=2
+[20:59:03.162] [RX ] FFFF FFFF
+             → [65535, 65535]
+[20:59:19.426] [TX ] 01 03 13 A8 00 02 00 00
+             → FC03 Read Holding Regs  addr=5032  qty=2
+[20:59:19.554] [RX ] FFFF FFFF
+             → [65535, 65535]
+[20:59:30.021] [TX ] 01 03 13 87 00 02 00 00
+             → FC03 Read Holding Regs  addr=4999  qty=2
+[20:59:30.078] [RX ] 07EA 0003
+             → [2026, 3]
+[21:01:38.944] [TX ] 01 03 13 87 00 01 00 00
+             → FC03 Read Holding Regs  addr=4999  qty=1
+[21:01:38.978] [RX ] 07EA
+             → [2026]
+[21:01:44.101] [TX ] 01 03 13 87 00 02 00 00
+             → FC03 Read Holding Regs  addr=4999  qty=2
+[21:01:44.141] [RX ] 07EA 0003
+             → [2026, 3]
+[21:08:18.672] [INF] Disconnected

@@ -1,0 +1,6 @@
+# ModTool – Professional Modbus Debugging Tool
+# Python 3.10+  |  pip install -r requirements.txt
+
+dearpygui>=1.9.0
+pymodbus>=3.5.0
+pyserial>=3.5
