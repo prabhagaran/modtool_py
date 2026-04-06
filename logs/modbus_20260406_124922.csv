@@ -1,0 +1,13 @@
+Timestamp,Direction,Frame,Parsed,Status
+12:49:22.040,INF,Session started – logs → logs\modbus_20260406_124922.*,,OK
+12:49:40.771,INF,RTU connected → COM15  9600/N/1/8  slave=1,,OK
+12:52:37.330,TX,01 04 13 9A 00 01 00 00,FC04 Read Input Regs  addr=5018  qty=1,OK
+12:52:37.359,RX,2052,[8274],OK
+12:54:37.795,INF,Disconnected,,OK
+12:56:00.501,INF,RTU connected → COM15  9600/N/1/8  slave=1,,OK
+12:56:04.231,TX,01 04 13 9A 00 01 00 00,FC04 Read Input Regs  addr=5018  qty=1,OK
+12:56:04.260,RX,205F,[8287],OK
+12:56:15.028,TX,01 04 13 9A 00 0A 00 00,FC04 Read Input Regs  addr=5018  qty=10,OK
+12:56:15.078,RX,205F 2062 2063 0668 0668 066C FFFF FFFF FFFF FFFF,"[8287, 8290, 8291, 1640, 1640, 1644, 65535, 65535, 65535, 65535]",OK
+12:56:19.469,INF,Disconnected,,OK
+13:25:21.538,INF,Disconnected,,OK

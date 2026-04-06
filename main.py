@@ -15,6 +15,8 @@ import gui.connection_panel as conn_panel
 import gui.command_panel    as cmd_panel
 import gui.response_panel   as resp_panel
 import gui.debug_panel      as dbg_panel
+import gui.scanner_panel    as scanner_panel
+import gui.listener_panel   as listener_panel
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -96,22 +98,37 @@ def _build_ui() -> None:
         dpg.add_separator()
         dpg.add_spacer(height=5)
 
-        # ── Two-column layout ──────────────────────────────────────────────
-        with dpg.group(horizontal=True):
+        # ── Tab bar ───────────────────────────────────────────────────────
+        with dpg.tab_bar(tag="main_tabs"):
 
-            # ── LEFT: Connection + Command ────────────────────────────────
-            with dpg.group():
-                conn_panel.build()
-                dpg.add_spacer(height=6)
-                cmd_panel.build()
+            # ── Tab: Modbus ───────────────────────────────────────────────
+            with dpg.tab(label="  Modbus  ", tag="tab_modbus"):
+                dpg.add_spacer(height=4)
+                with dpg.group(horizontal=True):
 
-            dpg.add_spacer(width=6)
+                    # LEFT: Connection + Command
+                    with dpg.group():
+                        conn_panel.build()
+                        dpg.add_spacer(height=6)
+                        cmd_panel.build()
 
-            # ── RIGHT: Response + Debug ───────────────────────────────────
-            with dpg.group():
-                resp_panel.build()
-                dpg.add_spacer(height=6)
-                dbg_panel.build()
+                    dpg.add_spacer(width=6)
+
+                    # RIGHT: Response + Debug
+                    with dpg.group():
+                        resp_panel.build()
+                        dpg.add_spacer(height=6)
+                        dbg_panel.build()
+
+            # ── Tab: Scanner ──────────────────────────────────────────────
+            with dpg.tab(label="  Scanner  ", tag="tab_scanner"):
+                dpg.add_spacer(height=4)
+                scanner_panel.build()
+
+            # ── Tab: Listener ─────────────────────────────────────────────
+            with dpg.tab(label="  Listener  ", tag="tab_listener"):
+                dpg.add_spacer(height=4)
+                listener_panel.build()
 
 
 # ─────────────────────────────────────────────────────────────────────────────
