@@ -1,0 +1,4209 @@
+-- PAGE 1 --
+
+
+-- PAGE 2 --
+Revision
+REVISION
+Document Identification         :         FMCOMDOCMODBUSV0100
+Revision No                                       Changes                                                                                     Date
+0                                                         New Document                                                                   03/04/2018
+
+
+-- PAGE 3 --
+1                                                         LED  Status  Address   has   been  added.  Current sensor and 
+Voltage Sensor Address is added
+2                                                         Fault record Trip elements are corrected and Event record Trip messages are 
+added.
+3                                                         CBF   setting   ranges   are   added   in   protection settings.  Hot  Line tag  is  
+added  in  event  record  J
+Register.     Corrected     spelling     mistakes     in protection settings G9 register. Corrected register 
+size in write command.
+Correct the Multiplication Factor for Fault record4                                                         and Measurand.
+MD Apparent Power Reverse address, Frequency
+5                                                         multiplication    factor    has    been    corrected    in Measurand.   Add   Control   
+Changed   event   and Breaker  Close  name  changed  to  Breaker  status in Event record.
+Spontaneous  Events  address  is  added.  Realtime6                                                         Rly Function address is added in System settings, Output relay and LED 
+settings. Address modified for  DI  Timer  &  Blocking,  LED  status,  Sensor value.
+Reg_25024:   Added   negative   sign   for   T.KW-7                                                         Export & positive sign for T.KW-Import.
+Reg_25026: Added negative sign for T.KVAR-Lg & positive sign for T.KVAR-Ld.
+Reg_25028: Added T.KVA value.13/07/2018
+28/07/2018
+31/7/2018
+19/11/2018
+19/12/2019
+16/11/2020
+19/03/2022
+Contents
+TABLE OF CONTENTS
+1      Communication Parameters                                                                                                         4
+2      Measurements                                                                                                                                4
+3      Settings                                                                                                                                           6
+3.1   System Settings ……………………………………… 6
+3.2   Protection Settings ……………………………………… 8
+3.3   Auto Reclose Settings …………………………………… ..10
+
+-- PAGE 4 --
+1
+2
+3
+4
+5
+40001 0.001
+40003 0.0013.4   Cold Load Settings …………………………………… ..11
+3.5   Demand Control Settings …………………………………… ..12
+3.6   CB Maintaince Settings …………………………………… ..12
+3.7   Sectionalizer Settings …………………………………… ..12
+3.8   Output Relay Settings …………………………………… ..12
+3.9   LED Settings …………………………………… ..14
+3.10  Digital Input Timer Settings                                                                                              17
+3.11  Digital Input Blocking Settings
+3.12 LED Status………………………………… ..…20
+…………………………………… ..23
+4      Commands                                                                                                                                   23
+5      Time Synchronization                                                                                                                  23
+6      Fault Record                                                                                                                                24
+7      Event Record                                                                                                                               26
+8      Events                                                                                                                                           27
+1 Communication Parameters
+MODBUS MEMORY MAPPING
+1 COMMUNICATION PARAMETERS:
+The  communication  between  the  Master  and  Slave  (Relay)  is  established  using  the  following parameters. The following parameters 
+when given correctly establish the communication.
+Sl NoParameters Range
+Station Address/Device Id 1 to 247
+Baud Rate 1200 , 2400 , 4800 , 9600 , 19200
+Stop Bits 1,2
+Parity None , Odd , Even
+Data Bits 7 , 8
+2 MEASUREMENTS:
+Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+R Phase Protection Current -4 Bytes-
+Y Phase Protection Current -4 Bytes-
+
+-- PAGE 5 --
+40005 0.001
+40007 0.001
+40009 0.001
+40011 0.001
+40013 0.001
+40015 0.001
+40017 0.001
+40019 0.001
+40021 0.001
+40023 0.0001
+40025 0.0001
+40027 0.0001
+40029 0.0001
+40031 0.0001
+40033 0.0001
+40035 0.0001
+40037 0.0001
+40039 0.0001
+40041 0.0001
+40043 0.0001
+40045 0.0001
+40047 0.0001
+40049 0.001
+40051 0.001
+40053 0.001
+40055 0.001
+40057 0.001
+40059 0.001
+40061 0.001
+40063 0.001
+40065 0.001
+40067 0.001
+40069 0.001
+40071 0.001
+40073 0.001
+40075 0.001
+40077 0.001
+40079 0.001
+40081 0.001
+40083 0.001
+40085 0.001
+40087 0.001
+40089 0.001
+40091 0.001
+40093 0.001B Phase Protection Current -4 Bytes-
+Earth Current -4 Bytes-
+Sensitive Earth Fault Current -4 Bytes-
+I1 Current-Positive Sequence -4 Bytes-
+I2 Current-Negative Sequence -4 Bytes-
+I0 Current-Zero Sequence -4 Bytes-
+R Phase Meter Current -4 Bytes-
+Y Phase Meter Current -4 Bytes-
+B Phase Meter Current -4 Bytes-
+R Phase L-N Voltage -4 Bytes-
+Y Phase L-N Voltage -4 Bytes-
+B Phase L-N Voltage -4 Bytes-
+RY Line-Line Voltage -4 Bytes-
+YB Line-Line Voltage -4 Bytes-
+BR Line-Line Voltage -4 Bytes-
+Residual Voltage -4 Bytes-
+V1 Voltage-Positive Sequence -4 Bytes-
+V2 Voltage-Negative Sequence -4 Bytes-
+V0 Voltage-Zero Sequence -4 Bytes-
+R Phase L-N Output Voltage -4 Bytes-
+Y Phase L-N Output Voltage -4 Bytes-
+B Phase L-N Output Voltage -4 Bytes-
+R Phase Reverse KW -4 Bytes-
+R Phase Forward KW -4 Bytes-
+Y Phase Reverse KW -4 Bytes-
+Y Phase Forward KW -4 Bytes-
+B Phase Reverse KW -4 Bytes-
+B Phase Forward KW -4 Bytes-
+R Phase Reverse KVA -4 Bytes-
+R Phase Forward KVA -4 Bytes-
+Y Phase Reverse KVA -4 Bytes-
+Y Phase Forward KVA -4 Bytes-
+B Phase Reverse KVA -4 Bytes-
+B Phase Forward KVA -4 Bytes-
+R Phase Power Factor -4 Bytes-
+Y Phase Power Factor -4 Bytes-
+B Phase Power Factor -4 Bytes-
+R Phase KVAR Reverse Lag -4 Bytes-
+R Phase KVAR Reverse Lead -4 Bytes-
+R Phase KVAR Forward Lag -4 Bytes-
+R Phase KVAR Forward Lead -4 Bytes-
+Y Phase KVAR Reverse Lag -4 Bytes-
+Y Phase KVAR Reverse Lead -4 Bytes-
+Y Phase KVAR Forward Lag -4 Bytes-
+Y Phase KVAR Forward Lead -4 Bytes-
+
+-- PAGE 6 --
+40095 0.001
+40097 0.001
+40099 0.001
+40101 0.001
+40103 0.001
+40105 0.001
+40107 0.001
+40109 0.001
+40111 0.001
+40113 0.001
+40115 0.001
+40117 0.001
+40119 0.001
+40121 0.001
+40123 0.001
+40125 0.001
+40127 0.001
+40129 0.001
+40131 0.001
+40133 0.001
+40135 0.001
+40137 0.001
+40139 0.001
+40141 0.001
+40143 0.001
+40145 0.001
+40147 0.001
+40149 0.001
+40151 0.001
+40153 0.001
+40155 0.001
+40157 0.001
+40159 0.001
+40161 0.001
+40163 0.001
+40165 0.001
+40167 0.001
+40169 0.001
+40171 0.001
+40173 0.001
+40175 0.001
+40177 0.001
+40179 0.001
+40181 0.001
+40183 0.001B Phase KVAR Reverse Lag -4 Bytes-
+B Phase KVAR Reverse Lead -4 Bytes-
+B Phase KVAR Forward Lag -4 Bytes-
+B phase KVAR Forward Lead -4 Bytes-
+Total KW Reverse -4Bytes-
+Total KW Forward -4 Bytes-
+Total KVA Reverse -4 Bytes-
+Total KVA Forward -4 Bytes-
+Total KVAR Reverse Lag -4 Bytes-
+Total KVAR Reverse Lead -4 Bytes-
+Total KVAR Forward Lag -4 Bytes-
+Total KVAR Forward Lead -4 Bytes-
+R Active Energy Reverse -4 Bytes-
+Y Active Energy Reverse -4 Bytes-
+B Active Energy Reverse -4 Bytes-
+R Active Energy Forward -4 Bytes-
+Y Active Energy Forward -4 Bytes-
+B Active Energy Forward -4 Bytes-
+R Apparent Energy Reverse -4 Bytes-
+Y Apparent Energy Reverse -4 Bytes-
+B Apparent Energy Reverse -4 Bytes-
+R Apparent Energy Forward -4 Bytes-
+Y Apparent Energy Forward -4 Bytes-
+B Apparent Energy Forward -4 Bytes-
+R KVARH Reverse Lead -4 Bytes-
+Y KVARH Reverse Lead -4 Bytes-
+B KVARH Reverse Lead -4 Bytes-
+R KVARH Reverse Lag -4 Bytes-
+Y KVARH Reverse Lag -4 Bytes-
+B KVARH Reverse Lag -4 Bytes-
+R KVARH Forward Lead -4 Bytes-
+Y KVARH Forward Lead -4 Bytes-
+B KVARH Forward Lead -4 Bytes-
+R KVARH Forward Lag -4 Bytes-
+Y KVARH Forward Lag -4 Bytes-
+B KVARH Forward Lag -4 Bytes-
+Total Active Energy Reverse -4 Bytes-
+Total Active Energy Forward -4 Bytes-
+Total Apparent Energy Reverse -4 Bytes-
+Total Apparent Energy Forward -4 Bytes-
+Total KVARH Reverse Lead -4 Bytes-
+Total KVARH Reverse Lag -4 Bytes-
+Total KVARH Forward Lead -4 Bytes-
+Total KVARH Forward Lag -4 Bytes-
+Average Power Factor -4 Bytes-
+
+-- PAGE 7 --
+40185 0.001
+40187 0.001
+40189 0.001
+40191 0.001
+40193 0.001
+40195 0.001
+40197 0.001
+40199 0.001
+40201 0.01
+40203 1
+40205 1
+40207 1
+40209 1
+40211 1
+40213 1
+40215 1
+40217 1
+25024 0.001
+25026 0.001
+25028 0.001
+1
+40299
+40300 11
+40301 11
+40302 11
+40303 11
+40304 11
+40305 11
+40306 11
+40307 11
+40308 11
+40309 11
+40310 11MD Apparent Power Reverse -4 Bytes-
+MD Apparent Power Forward -4 Bytes-
+MD Active Power Reverse -4 Bytes-
+MD Active Power Forward -4 Bytes-
+Cumulative MD KVA Reverse -4 Bytes-
+Cumulative MD KVA Forward -4 Bytes-
+Cumulative MD KW Reverse -4 Bytes-
+Cumulative MD KW Forward -4 Bytes-
+Frequency -4 Bytes-
+Last Outage  Bus Days-2 Bytes,Hours,Minutes -4Bytes-
+Total Outage Bus Days-2 Bytes,Hours,Minutes -4 Bytes-
+Last Outage  Load  Days-2
+Bytes,Hours,Minutes-4Bytes-
+Total Outage Load  Days-2
+Bytes,Hours,Minutes-4 Bytes-
+Outage Count Bus -4 Bytes-
+Outage Count Load -4 Bytes-
+Auto Trip Count -4 Bytes-
+Sum Of I^2 Alarm -4 Bytes-
+3Ph Total KW -4 Bytes-
+3Ph Total KVAR -4 Bytes-
+3Ph Total KVA -4 Bytes-
+3 SETTINGS:
+3.1 System Settings:
+Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+40284-Identifier -16 Bytes-
+Current Sensor Direction Fwd-1,Rev-0 1 Byte
+No Volt UV Block Yes-1,No-0 1 Byte
+Cold Load ON-1,OFF-0 1 Byte
+Auto Reclose ON-1,OFF-0 1 Byte
+Sectionalizer Setting ON-1,OFF-0 1 Byte
+Breaker Charging OFF-0,
+DeadBus-1, 
+DeadLine-21 Byte
+OV Operate Mode Single Phase-1, 
+Three Phase-01 Byte
+UV Operate Mode Single Phase-1, 
+Three Phase-01 Byte
+Active Group G1-GT(1-10) 1 Byte
+Edit Group G1-GT(1-10) 1 Byte
+Digital Input1 Configuration *Note 11 Byte
+
+-- PAGE 8 --
+40311 11
+40312 11
+40313 11
+40314 11
+40315 11
+40316 11
+40317 11
+40318 11
+40319 11
+40320 11
+40321 11
+40322 11
+40323 11
+40324 11
+40325 11
+40326 11
+41142 11
+11
+41143 11
+41144 11
+41145 11
+41146 11
+41147 11
+41148 11
+41149 11
+41150 11
+41151 11
+41152 11
+41153 11
+41154 11
+41155 11
+41156 11Digital Input2 Configuration *Note 11 Byte
+Digital Input3 Configuration *Note 11 Byte
+Digital Input4 Configuration *Note 11 Byte
+Digital Input5 Configuration *Note 11 Byte
+Digital Input6 Configuration *Note 11 Byte
+Digital Input7 Configuration *Note 11 Byte
+Digital Input8 Configuration *Note 11 Byte
+Digital Input9 Configuration *Note 11 Byte
+Digital Input10 Configuration *Note 11 Byte
+Digital Input11 Configuration *Note 11 Byte
+Digital Input12 Configuration *Note 11 Byte
+Digital Input13 Configuration *Note 11 Byte
+Digital Input14 Configuration *Note 11 Byte
+Digital Input15 Configuration *Note 11 Byte
+Push Button 1 *Note 21 Byte
+Push Button 2 *Note 21 Byte
+Current Sensor 1-31 Byte
+Voltage Sensor 1-51 Byte
+Real Time RLY1 ON-1,OFF-0 1 Byte
+Real Time RLY2 ON-1,OFF-0 1 Byte
+Real Time RLY1 On Hr 00-231 Byte
+Real Time RLY1 On Min 00-591 Byte
+Real Time RLY1 On Sec 00-591 Byte
+Real Time RLY1 Off Hr 00-231 Byte
+Real Time RLY1 Off Min 00-591 Byte
+Real Time RLY1 Off Sec 00-591 Byte
+Real Time RLY2 On Hr 00-231 Byte
+Real Time RLY2 On Min 00-591 Byte
+Real Time RLY2 On Sec 00-591 Byte
+Real Time RLY2 Off Hr 00-231 Byte
+Real Time RLY2 Off Min 00-591 Byte
+Real Time RLY2 Off Sec 00-591 Byte
+
+-- PAGE 9 --
+40327 11
+40328 11
+40329 10.001
+40330 10.01Note 1:
+0 – OFF
+1 – ON
+2 – ON, Group Change
+4 – ON, Reset Device
+5 – ON, Remote Close
+6 – ON, Remote Trip S
+7 – ON, Remote Trip H
+Note 2:
+0 – OFF
+1 – ON
+2 – ON, Group Change
+4 – ON, Reset Device
+5 – ON, Close
+6 – ON, Trip S
+7 – ON, Trip H
+8 – ON, Local/Remote
+3.2 Protection Settings:
+Address Register Name RangeRegister SizeStepMultiplication 
+Factor
+Phase Current (A) Depends upon the
+Sensor Rating2 Bytes
+Phase Characteristics 1-6 1 Byte
+Phase Time Multiplier (S) 1– 1600 2 Bytes
+Phase Definite Time Lag(S) 0 – 20000 2 Bytes
+
+-- PAGE 10 --
+40331 11
+40332 10.001
+40333 11
+40334 11
+40335 11
+40336 10.001
+40337 10.01
+40338 11
+40339 10.001
+40340 11
+40341 11
+40342 11
+40343 10.01
+40344 11
+40345 10.01
+40346 11
+40347 11
+40348 10.01
+40349 10.01
+40350 11
+40351 10.01
+40352 11
+40353 11
+40354 11
+40355 10.01
+40356 10.01
+40357 11Phase Wideset (A) Depends upon the
+Sensor Rating2 Bytes
+Phase Wideset Time (S) 0 – 20000 2 Bytes
+Phase Highset (A) Depends upon the
+Sensor Rating2 Bytes
+Earth Current (A) Depends upon the 2 Bytes
+Sensor Rating
+Earth Characteristics 1-6 1 Byte
+Earth Time Multiplier (S) 1-1600 2 Bytes
+Earth Definite Time Lag(S) 0-20000 2 Bytes
+Earth Wideset (A) Depends upon the
+Sensor Rating2 Bytes
+Earth Wideset Time (S) 0-20000 2 Bytes
+Earth Highset (A) Depends upon the
+Sensor Rating2 Bytes
+Reset Time (S) 1-60 2 Bytes
+Circuit Breaker Failure Set(A) Depends upon the 
+Sensor Rating2 Bytes
+Circuit Breaker Failure Delay
+(S)0-100 2 Bytes
+Sensitive Earth Fault Set(A) Depends upon the 
+Sensor Rating2 Bytes
+Sensitive Earth Fault Time(S) 0-2000 2 Bytes
+Over Voltage Stage1 (V) Depends upon the
+Sensor Rating2 Bytes
+Over Voltage Stage1
+Characteristics1-2 1 Bytes
+Over Voltage Time Multiplier (S) 25-10000 2 Bytes
+Over Voltage Definite Time
+Lag (S)0-60000 2 Bytes
+Over Voltage Stage2 (V) Depends upon the
+Sensor Rating2 Bytes
+Over Voltage Stage2 Definite
+Time Lag (S)0-60000 2 Bytes
+Over Voltage Reset Time(S) 1-60 2 Bytes
+Under Voltage Stage1 (V) Depends upon the
+Sensor Rating2 Bytes
+Under Voltage Stage1
+Characteristics1-6 1 Bytes
+Under Voltage Stage1 Time
+Multiplier (S)25-10000 2 bytes
+Under Voltage Stage1
+Definite Time Lag (S)0-60000 2 bytes
+Under Voltage Stage 2(V) Depends upon the 
+Sensor Rating2 Bytes
+
+-- PAGE 11 --
+40358 10.01
+40359 11
+40360 11
+40361 11
+40362 10.01
+40363 10.01
+40364 11
+40365 10.01
+40366 11
+40367 40406
+40407 40446
+40447 40486
+40487 40526
+40527 40566
+40567 40606
+40607 40646Under Voltage Stage2
+Definite Time Lag (S)0-60000 2 Bytes
+Under Voltage Reset Time(S) 1-60 2 Bytes
+Residual Voltage Stage1(V) Depends upon the
+Sensor Rating2 Bytes
+Residual Voltage Characteristics 1-2 2 Bytes
+Residual Voltage Time Multiplier 
+(S)25-10000 2 Bytes
+Residual Voltage Definite
+Time Lag (S)0-60000 2 Bytes
+Residual Voltage Stage2 (V) Depends upon the
+Sensor Rating2 Bytes
+Residual Voltage Stage2 Definite 
+Time Lag (S)0-60000 2 Bytes
+Residual Voltage Reset Time
+(S)1-60 2 Bytes
+Sensor 
+RatingPhase SetPhase Wideset / 
+HighsetEarth SetEarth Wideset / 
+HighsetCB Fail Set
+60 A3-120 A3-1800 A 3-120 A3-1800 A 3-120 A
+250 A10-500 A10-7500 A 10-500 A10-7500 A 10-500 A
+750 A30-1500 A30-22500 A 30-1500 A30-22500 A 30-1500 A
+Sensor
+RatingOV Stage1 OV Stage2 UV Stage1 UV Stage2RES Stage1
+1.905 KV1500-3240V 1500-3240V 150-2280V 150-2280V20-600V
+3.811 KV3000-6480V 3000-6480V 300-4560V 300-4560V40-1200V
+6.351 KV5000-10800V 5000-10800V 500-7600V 500-7600V60-2000V
+12.702 KV10000-21600V 10000-21600V 1000-15200V 1000-15200V120-4000V
+19.053 KV15000-32400V 15000-32400V 1500-22800V 1500-22800V180-6000V
+The above address values are for Group1 Settings of the Protection settings the Protection settings information for the other groups are 
+same as that of the Group1 except their address are different from Group1. The settings are of same order for all the Groups. The starting 
+and ending address of the other Group setting are given below
+Group Starting Address Ending Address
+Protection Settings Group 2
+Protection Settings Group 3
+Protection Settings Group 4
+Protection Settings Group 5
+Protection Settings Group 6
+Protection Settings Group 7
+Protection Settings Group 8
+
+-- PAGE 12 --
+40647 40686
+40687 40726
+40727 11
+40728 10.01
+40729 10.01
+40730 10.01
+40731 10.01
+40732 10.01
+40733 10.01
+40734 10.01
+40735 10.01
+40736 10.01
+40737 10.01
+40738 10.01
+40739 10.01
+40740 10.01
+40741 10.01
+40742 1
+40743 1
+40744 1
+40745 1
+40746 1
+40747 1
+40748 1
+40749 1Protection Settings Group 9
+Protection Settings Group 10
+3.3 Auto Reclose Setting:
+AddressRegister Name RangeRegister 
+SizeStepMultiplication 
+Factor
+Auto Shots 1-42 Bytes
+Reclaim Time (M) 5-60002 Bytes
+LockOut H.Reset Time
+(S)50-600002 Bytes
+Phase Fault Reclose
+Time 1 (S)50-600002 Bytes
+Phase Fault Reclose Time 2 (S) 50-600002 Bytes
+Phase Fault Reclose
+Time 3 (S)50-600002 Bytes
+Phase Fault Reclose
+Time 4 (S)50-600002 Bytes
+Earth Fault Reclose
+Time 1 (S)50-600002 Bytes
+Earth Fault Reclose
+Time 2 (S)50-600002 Bytes
+Earth Fault Reclose
+Time 3 (S)50-600002 Bytes
+Earth Fault Reclose
+Time 4 (S)50-600002 Bytes
+Sensitive Earth Fault
+Reclose Time 1 (S)50-600002 Bytes
+Sensitive Earth Fault
+Reclose Time 2 (S)50-600002 Bytes
+Sensitive Earth Fault Reclose 
+Time 3 (S)50-600002 Bytes
+Sensitive Earth Fault Reclose 
+Time 4 (S)50-600002 Bytes
+AR 1 Protection Block 0-81912 Bytes -
+AR 2 Protection Block 0-81912 Bytes -
+AR 3 Protection Block 0-81912 Bytes -
+AR 4 Protection Block 0-81912 Bytes -
+Protection AR 1 Block 0-1272 Bytes -
+Protection AR 2 Block 0-1272 Bytes -
+Protection AR 3 Block 0-1272 Bytes -
+Protection AR 4 Block 0-1272 Bytes -
+3.4 Cold Load Setting:
+
+-- PAGE 13 --
+40750 11
+40751 11
+40752 11
+40753 11
+40754 11
+40755 11
+40756 11
+40757 11
+40758 11
+40759 11
+40760 11
+40761 11
+40762 11
+40763 11
+40764 11
+40765 11
+40766 11
+40767 11
+40768 11
+40769 10.01AddressRegister Name RangeRegister 
+SizeStepMultiplication 
+Factor
+Breaker OFF Time Hours 0-232 Bytes
+Breaker OFF Time
+Minutes0-592 Bytes
+Breaker OFF Time
+Seconds0-592 Bytes
+Breaker OFF Time 
+Milliseconds0-992 Bytes
+Cold Load Reset Time Hours 0-232 Bytes
+Cold Load Reset Time 0-592 Bytes
+Minutes
+Cold Load Reset Time
+Seconds0-592 Bytes
+Cold Load Reset Time
+Milliseconds0-992 Bytes
+Cold Load Reset (Time) 0-OFF ,
+1-ON2 Bytes
+Cold Load Reset (Current) 0-OFF ,
+1-ON2 Bytes
+3.5 Demand Control Settings:
+AddressRegister Name RangeRegister
+SizeStepMultiplication
+Factor
+Max KVA Period 1-62 Bytes
+Max KVA Sub Period 1-602 Bytes
+Max KVA Setting 0-650002 Bytes
+Max KW Period 1-62 Bytes
+Max KW Sub Period 1-602 Bytes
+Max KW Setting 0-650002 Bytes
+3.6 CB Maintaince Settings:
+AddressRegister Name RangeRegister
+SizeStepMultiplication
+Factor
+Trip Count Alarm 0-9992 Bytes
+Sum Of I^2 Alarm 0-650002 Bytes
+3.7 Sectionalizer Settings:
+AddressRegister Name RangeRegister
+SizeStepMultiplication
+Factor
+Fault Count 1-42 Bytes
+Reclaim Time (M) 0-60002 Bytes
+
+-- PAGE 14 --
+40770 11
+40771 10.01
+40772 11
+40773 1
+40774 1
+40775 1
+40776 1
+40777 1
+40778 1
+40779 1
+40780 1
+40781 1
+40782 1
+40783 1
+40784 1
+40785 1
+40786 1
+40787 1
+40788 1
+40789 1
+40790 1
+40791 1
+40792 1
+40793 1
+40794 1
+40795 1
+40796 1
+40797 1
+40798 1
+40799 1
+40800 1
+40801 1
+40802 1
+40803 1Auto Direction
+Group Set0-OFF,
+1-ON2 Bytes
+AGBD Time (S) 1000-30002 Bytes
+3.8 Output Relay Settings:
+Address Register Name RangeRegister
+SizeStepMultiplication
+Factor
+Output Relay
+Configuration0-OFF , 1-ON 2 Bytes
+Hand Reset 0-312 Bytes -
+Non Trip Alarm 0-312 Bytes -
+Trip Alarm 0-312 Bytes-
+Phase Fault IDMT Start 0-312 Bytes-
+Phase Fault Wideset Start 0-312 Bytes-
+Earth Fault IDMT Start 0-312 Bytes-
+Earth Fault Wideset Start 0-312 Bytes-
+Phase Fault IDMT Trip 0-312 Bytes-
+Phase Fault Wideset Trip 0-312 Bytes-
+Phase Fault Highset Trip 0-312 Bytes-
+Earth Fault IDMT Trip 0-312 Bytes-
+Earth Fault Wideset Trip 0-312 Bytes-
+Earth Fault Highset Trip 0-312 Bytes-
+Over Voltage Stage1 Start 0-312 Bytes-
+Over Voltage Stage2 Start 0-312 Bytes-
+Under Voltage Stage1 Start 0-312 Bytes-
+Under Voltage Stage2 Start 0-312 Bytes-
+Residual Voltage Stage1
+Start0-312 Bytes-
+Residual Voltage Stage2 Start 0-312 Bytes-
+Over Voltage Stage1 Trip 0-312 Bytes-
+Over Voltage Stage2 Trip 0-312 Bytes-
+Under Voltage Stage1 Trip 0-312 Bytes-
+Under Voltage Stage2 Trip 0-312 Bytes-
+Residual Voltage Stage1
+Trip0-312 Bytes-
+Residual Voltage Stage2
+Trip0-312 Bytes-
+Sensitive Earth Fault Start 0-312 Bytes-
+Sensitive Earth Fault Trip 0-312 Bytes-
+Circuit Breaker Fail 0-312 Bytes-
+Trip Count Alarm 0-312 Bytes-
+Sum of I^2 Alarm 0-312 Bytes-
+Auto Reclose 0-312 Bytes-
+
+-- PAGE 15 --
+40804 1
+40805 1
+40806 1
+40807 1
+40808 1
+40809 1
+40810 1
+40811 1
+40812 1
+40813 1
+40814 1
+40815 1
+40816 1
+40817 1
+40818 1
+40819 1
+40820 1
+40821 1
+40822 1
+40823 1
+40824 1
+40825 1
+40826 1
+40827 1
+40828 1
+40829 1
+40830 1
+40831 1
+40832 1
+40833 1
+40834 1
+40835 1
+40836 1
+40837 1
+40838 1
+40839 1
+40840 1
+40841 1
+40842 1
+40843 1
+40844 1
+40845 1Reclaim Time 0-312 Bytes-
+Reclose Time 0-312 Bytes-
+Lock Out 0-312 Bytes-
+Trip Locked 0-312 Bytes-
+DC Healthy 0-312 Bytes-
+Spring Charge 0-312 Bytes-
+Trip Circuit Healthy 0-312 Bytes-
+Local Mode 0-312 Bytes-
+Remote Mode 0-312 Bytes-
+Maximum Demand KW 0-312 Bytes-
+Maximum Demand KVA 0-312 Bytes-
+Digital Input 5 Pickup 0-312 Bytes-
+Digital Input 6 Pickup 0-312 Bytes-
+Digital Input 7 Pickup 0-312 Bytes-
+Digital Input 8 Pickup 0-312 Bytes-
+Digital Input 9 Pickup 0-312 Bytes-
+Digital Input 10 Pickup 0-312 Bytes -
+Digital Input 11 Pickup 0-312 Bytes -
+Digital Input 12 Pickup 0-312 Bytes -
+Digital Input 13 Pickup 0-312 Bytes -
+Digital Input 14 Pickup 0-312 Bytes -
+Digital Input 15 Pickup 0-312 Bytes -
+Digital Input 5 DropOff 0-312 Bytes -
+Digital Input 6 DropOff 0-312 Bytes -
+Digital Input 7 DropOff 0-312 Bytes -
+Digital Input 8 DropOff 0-312 Bytes -
+Digital Input 9 DropOff 0-312 Bytes -
+Digital Input 10 DropOff 0-312 Bytes -
+Digital Input 11 DropOff 0-312 Bytes -
+Digital Input 12 DropOff 0-312 Bytes -
+Digital Input 13 DropOff 0-312 Bytes -
+Digital Input 14 DropOff 0-312 Bytes -
+Digital Input 15 DropOff 0-312 Bytes -
+Push Button 1 Pickup 0-312 Bytes -
+Push Button 2 Pickup 0-312 Bytes -
+Push Button 1 DropOff 0-312 Bytes -
+Push Button 2 DropOff 0-312 Bytes -
+R Phase Trip 0-312 Bytes -
+Y Phase Trip 0-312 Bytes -
+B Phase Trip 0-312 Bytes -
+Realtime RLY1 0-312 Bytes -
+Realtime RLY2 0-312 Bytes -
+3.9 LED Settings:
+
+-- PAGE 16 --
+40846 11
+40847 1
+40848 1
+40849 1
+40850 1
+40851 1
+40852 1
+40853 1
+40854 1
+40855 1
+40856 1
+40857 1
+40858 1
+40859 1
+40860 1
+40861 1
+40862 1
+40863 1
+40864 1
+40865 1
+40866 1
+40867 1
+40868 1
+40869 1
+40870 1
+40871 1
+40872 1
+40873 1
+40874 1
+40875 1
+40876 1
+40877 1
+40878 1
+40879 1
+40880 1
+40881 1
+40882 1
+40883 1
+40884 1
+40885 1
+40886 1
+40887 1Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+LED Configuration 0-OFF,
+1-ON2 Bytes
+R Phase IDMT/DTL Start *Note 32 Bytes -
+Y Phase IDMT/DTL Start *Note 32 Bytes -
+B Phase IDMT/DTL Start *Note 32 Bytes -
+R Wideset Start *Note 32 Bytes -
+Y Wideset Start *Note 32 Bytes -
+B Wideset Start *Note 32 Bytes -
+Earth IDMT/DTL Start *Note 32 Bytes -
+Earth Wideset Start *Note 32 Bytes -
+R Phase IDMT/DTL Trip *Note 32 Bytes -
+Y Phase IDMT/DTL Trip *Note 32 Bytes -
+B Phase IDMT/DTL Trip *Note 32 Bytes -
+R Phase Wideset Trip *Note 32 Bytes -
+Y Phase Wideset Trip *Note 32 Bytes -
+B Phase Wideset Trip *Note 32 Bytes -
+R Phase Highset Trip *Note 32 Bytes -
+Y Phase Highset Trip *Note 32 Bytes-
+B Phase Highset Trip *Note 32 Bytes-
+Earth IDMT/DTL Trip *Note 32 Bytes-
+Earth Wideset Trip *Note 32 Bytes-
+Earth Highset Trip *Note 32 Bytes-
+RN OV Stage1 Start *Note 32 Bytes-
+YN OV Stage1 Start *Note 32 Bytes-
+BN OV Stage1 Start *Note 32 Bytes-
+RN OV Stage2 Start *Note 32 Bytes-
+YN OV Stage2 Start *Note 32 Bytes-
+BN OV Stage2 Start *Note 32 Bytes-
+RN UV Stage1 Start *Note 32 Bytes-
+YN UV Stage1 Start *Note 32 Bytes-
+BN UV Stage1 Start *Note 32 Bytes-
+RN  UV Stage2 Start *Note 32 Bytes-
+YN UV Stage2 Start *Note 32 Bytes-
+BN UV Stage2 Start *Note 32 Bytes-
+RN OV Stage 1 Trip *Note 32 Bytes-
+YN OV Stage 1 Trip *Note 32 Bytes-
+BN OV Stage 1 Trip *Note 32 Bytes-
+RN OV Stage 2 Trip *Note 32 Bytes-
+YN OV Stage 2 Trip *Note 32 Bytes-
+BN OV Stage 2 Trip *Note 32 Bytes-
+RN UV Stage 1 Trip *Note 32 Bytes-
+YN UV Stage 1 Trip *Note 32 Bytes-
+BN UV Stage 1 Trip *Note 32 Bytes-
+
+-- PAGE 17 --
+40888 1
+40889 1
+40890 1
+40891 1
+40892 1
+40893 1
+40894 1
+40895 1
+40896 1
+40897 1
+40898 1
+40899 1
+40900 1
+40901 1
+40902 1
+40903 1
+40904 1
+40905 1
+40906 1
+40907 1
+40908 1
+40909 1
+40910 1
+40911 1
+40912 1
+40913 1
+40914 1
+40915 1
+40916 1
+40917 1
+40918 1
+40919 1
+40920 1
+40921 1
+40922 1
+40923 1
+40924 1
+40925 1
+40926 1
+40927 1
+40928 1RN UV Stage 2 Trip *Note 32 Bytes-
+YN UV Stage 2 Trip *Note 32 Bytes-
+BN UV Stage 2 Trip *Note 32 Bytes-
+Residual Voltage Stage 1 Start *Note 32 Bytes-
+Residual Voltage Stage 2 Start *Note 32 Bytes-
+Residual Voltage Stage 1 Trip *Note 32 Bytes-
+Residual Voltage Stage 2 Trip *Note 32 Bytes-
+Sensitive Earth Fault Start *Note 32 Bytes-
+Sensitive Earth Fault Trip *Note 32 Bytes-
+Circuit Breaker Failure *Note 32 Bytes-
+Phase Fault Reclose Time1 *Note 32 Bytes-
+Phase Fault Reclose Time2 *Note 32 Bytes-
+Phase Fault Reclose Time3 *Note 32 Bytes-
+Phase Fault Reclose Time4 *Note 32 Bytes-
+Earth Fault Reclose Time1 *Note 32 Bytes-
+Earth Fault Reclose Time2 *Note 32 Bytes-
+Earth Fault Reclose Time3 *Note 32 Bytes-
+Earth Fault Reclose Time4 *Note 32 Bytes-
+Sensitive Earth Fault Reclose
+Time 1*Note 32 Bytes-
+Sensitive Earth Fault Reclose
+Time 2*Note 32 Bytes-
+Sensitive Earth Fault Reclose *Note 32 Bytes-
+Time 3
+Sensitive Earth Fault Reclose
+Time 4*Note 32 Bytes-
+Reclaim Time *Note 32 Bytes-
+AR 1 Protection Block *Note 32 Bytes-
+AR 2 Protection Block *Note 32 Bytes-
+AR 3 Protection Block *Note 32 Bytes-
+AR 4 Protection Block *Note 32 Bytes-
+Protection AR 1 Block *Note 32 Bytes-
+Protection AR 2 Block *Note 32 Bytes-
+Protection AR 3 Block *Note 32 Bytes-
+Protection AR 4 Block *Note 32 Bytes-
+Lock Out *Note 32 Bytes-
+Trip Count Alarm *Note 32 Bytes-
+Sum of I^2 Alarm *Note 32 Bytes-
+Maximum Demand KW *Note 32 Bytes-
+Maximum Demand KVA *Note 32 Bytes-
+Digital Input 5 Pickup *Note 32 Bytes-
+Digital Input 6 Pickup *Note 32 Bytes-
+Digital Input 7 Pickup *Note 32 Bytes-
+Digital Input 8 Pickup *Note 32 Bytes-
+Digital Input 9 Pickup *Note 32 Bytes-
+
+-- PAGE 18 --
+40929 1
+40930 1
+40931 1
+40932 1
+40933 1
+40934 1
+40935 1
+40936 1
+40937 1
+40938 1
+40939 1
+40940 1
+40941 1
+40942 1
+40943 1
+40944 1
+40945 1
+40946 1
+40947 1
+40948 1
+40949 1
+40950 1
+40951 1
+40952 1
+40953 1
+40954 1
+40955 1
+40956 1
+40957 1
+40958 1
+40959 1
+40960 1
+40961 1
+40962 1Digital Input 10 Pickup *Note 32 Bytes-
+Digital Input 11 Pickup *Note 32 Bytes-
+Digital Input 12 Pickup *Note 32 Bytes-
+Digital Input 13 Pickup *Note 32 Bytes-
+Digital Input 14 Pickup *Note 32 Bytes-
+Digital Input 15 Pickup *Note 32 Bytes-
+Digital Input 5 DropOff *Note 32 Bytes-
+Digital Input 6 DropOff *Note 32 Bytes-
+Digital Input 7 DropOff *Note 32 Bytes-
+Digital Input 8 DropOff *Note 32 Bytes-
+Digital Input 9 DropOff *Note 32 Bytes-
+Digital Input 10 DropOff *Note 32 Bytes-
+Digital Input 11 DropOff *Note 32 Bytes-
+Digital Input 12 DropOff *Note 32 Bytes-
+Digital Input 13 DropOff *Note 32 Bytes-
+Digital Input 14 DropOff *Note 32 Bytes-
+Digital Input 15 DropOff *Note 32 Bytes-
+Active Group 1 *Note 32 Bytes-
+Active Group 2 *Note 32 Bytes-
+Active Group 3 *Note 32 Bytes-
+Active Group 4 *Note 32 Bytes-
+Active Group 5 *Note 32 Bytes-
+Active Group 6 *Note 32 Bytes-
+Active Group 7 *Note 32 Bytes-
+Active Group 8 *Note 32 Bytes-
+Active Group 9 *Note 32 Bytes-
+Active Group 10 *Note 32 Bytes-
+Push Button 1 Pickup *Note 32 Bytes -
+Push Button 2 Pickup *Note 32 Bytes -
+Push Button 1 DropOff *Note 32 Bytes -
+Push Button 2 DropOff *Note 32 Bytes -
+Realtime RLY1 *Note 32 Bytes -
+Realtime RLY2 *Note 32 Bytes -
+Red LED Reset *Note 3.12 Bytes -
+Yellow LED Reset
+Note 3:
+     Yellow LED (Low Byte) – Only one LED can be set for a Setting
+     Red LED (High Byte) – Only one LED can be set for a Setting
+We can set either one Yellow LED or one Red LED for a setting we cannot set both Yellow LED and Red LED for the same Setting
+
+-- PAGE 19 --
+40963 11
+40964 11
+40965 11
+40966 11
+40967 11
+40968 11
+40969 11
+40970 11
+40971 11
+40972 1 1
+40973 1 1
+40974 1 1
+40975 1 1
+40976 1 1
+40977 1 1
+40978 1 1Note 3.1:
+     Yellow LED (Low Byte) – More than one LED can be set for this Setting
+     Red LED (High Byte) – More than one LED can be set for the Setting
+In this setting we can set both the Yellow and Red LED at the same time the values ranges from 0-255 for each Byte we can set all the eight 
+Yellow LEDs and eight Red LEDs at the same time
+3.10 Digital Input Timer:
+Address Register Name RangeRegister
+SizeStepMultiplication
+Factor
+Digital Input1 Pickup Hours
+Digital Input1 Pickup Minutes0-23
+0-592 Bytes
+Digital Input1 Pickup Seconds
+Digital Input1 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input1 DropOff  Hours
+Digital Input1 DropOff Minutes0-23
+0-592 Bytes
+Digital Input1 DropOff Seconds Digital Input1 
+DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input2 Pickup Hours Digital Input2 Pickup 
+Minutes0-23
+0-592 Bytes
+Digital Input2 Pickup Seconds Digital Input2 
+Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input2 DropOff  Hours
+Digital Input2 DropOff Minutes0-23
+0-592 Bytes
+Digital Input2 DropOff Seconds
+Digital Input2 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input3 Pickup Hours
+Digital Input3 Pickup Minutes0-23
+0-592 Bytes
+Digital Input3 Pickup Seconds
+Digital Input3 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input3 DropOff  Hours
+Digital Input3 DropOff Minutes0-23
+0-592 Bytes
+Digital Input3 DropOff Seconds Digital Input3 
+DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input4 Pickup Hours
+Digital Input4 Pickup Minutes0-23
+0-592 Bytes
+Digital Input4 Pickup Seconds
+Digital Input4 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input4 DropOff  Hours
+Digital Input4 DropOff Minutes0-23
+0-592 Bytes
+Digital Input4 DropOff Seconds
+Digital Input4 DropOff Milliseconds0-59
+0-992 Bytes
+
+-- PAGE 20 --
+40979 1 1
+40980 1 1
+40981 1 1
+40982 1 1
+40983 1 1
+40984 1 1
+40985 1 1
+40986 1 1
+40987 1 1
+40988 1 1
+40989 1 1
+40990 1 1
+40991 1 1
+40992 11
+40993 1 1
+40994 1 1
+40995 1 1
+40996 1 1
+40997 11
+40998 11
+40999 11
+41000 11Digital Input5 Pickup Hours
+Digital Input5 Pickup Minutes0-23
+0-592 Bytes
+Digital Input5 Pickup Seconds
+Digital Input5 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input5 DropOff  Hours
+Digital Input5 DropOff Minutes0-23
+0-592 Bytes
+Digital Input5 DropOff Seconds
+Digital Input5 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input6 Pickup Hours Digital Input6 
+Pickup Minutes0-23
+0-592 Bytes
+Digital Input6 Pickup Seconds Digital Input6 
+Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input6 DropOff  Hours
+Digital Input6 DropOff Minutes0-23
+0-592 Bytes
+Digital Input6 DropOff Seconds
+Digital Input6 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input7 Pickup Hours
+Digital Input7 Pickup Minutes0-23
+0-592 Bytes
+Digital Input7 Pickup Seconds
+Digital Input7 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input7 DropOff  Hours
+Digital Input7 DropOff Minutes0-23
+0-592 Bytes
+Digital Input7 DropOff Seconds Digital Input7 
+DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input8 Pickup Hours Digital Input8 
+Pickup Minutes0-23
+0-592 Bytes
+Digital Input8 Pickup Seconds Digital Input8 
+Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input8 DropOff  Hours
+Digital Input8 DropOff Minutes0-23
+0-592 Bytes
+Digital Input8 DropOff Seconds
+Digital Input8 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input9 Pickup Hours
+Digital Input9 Pickup Minutes0-23
+0-592 Bytes
+Digital Input9 Pickup Seconds
+Digital Input9 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input9 DropOff  Hours
+Digital Input9 DropOff Minutes0-23
+0-592 Bytes
+Digital Input9 DropOff Seconds
+Digital Input9 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input10 Pickup Hours Digital Input10 
+Pickup Minutes0-23
+0-592 Bytes
+Digital Input10 Pickup Seconds
+Digital Input10 Pickup Milliseconds0-59
+0-992 Bytes
+
+-- PAGE 21 --
+41001 11
+41002 11
+41003 11
+41004 11
+41005 11
+41006 11
+41007 11
+41008 11
+41009 11
+41010 11
+41011 11
+41012 11
+41013 11
+41014 11
+41015 11
+41016 11
+41017 11
+41018 11
+41019 11
+41020 11
+41021 11
+41022 11Digital Input10 DropOff  Hours
+Digital Input10 DropOff Minutes0-23
+0-592 Bytes
+Digital Input10 DropOff Seconds
+Digital Input10 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input11 Pickup Hours
+Digital Input11 Pickup Minutes0-23
+0-592 Bytes
+Digital Input11 Pickup Seconds
+Digital Input11 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input11 DropOff  Hours
+Digital Input11 DropOff Minutes0-23
+0-592 Bytes
+Digital Input11 DropOff Seconds
+Digital Input11 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input12 Pickup Hours
+Digital Input12 Pickup Minutes0-23
+0-592 Bytes
+Digital Input12 Pickup Seconds Digital Input12 
+Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input12 DropOff  Hours Digital Input12 
+DropOff Minutes0-23
+0-592 Bytes
+Digital Input12 DropOff Seconds
+Digital Input12 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input13 Pickup Hours
+Digital Input13 Pickup Minutes0-23
+0-592 Bytes
+Digital Input13 Pickup Seconds
+Digital Input13 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input13 DropOff  Hours
+Digital Input13 DropOff Minutes0-23
+0-592 Bytes
+Digital Input13 DropOff Seconds
+Digital Input13 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input14 Pickup Hours Digital Input14 
+Pickup Minutes0-23
+0-592 Bytes
+Digital Input14 Pickup Seconds Digital Input14 
+Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input14 DropOff  Hours Digital Input14 
+DropOff Minutes0-23
+0-592 Bytes
+Digital Input14 DropOff Seconds
+Digital Input14 DropOff Milliseconds0-59
+0-992 Bytes
+Digital Input15 Pickup Hours
+Digital Input15 Pickup Minutes0-23
+0-592 Bytes
+Digital Input15 Pickup Seconds
+Digital Input15 Pickup Milliseconds0-59
+0-992 Bytes
+Digital Input15 DropOff  Hours
+Digital Input15 DropOff Minutes0-23
+0-592 Bytes
+Digital Input15 DropOff Seconds
+Digital Input15 DropOff Milliseconds0-59
+0-992 Bytes
+
+-- PAGE 22 --
+41023 11
+41024 11
+41025 11
+41026 11
+41027 11
+41028 11
+41029 11
+41030 11
+41031
+41032
+41033
+41034
+41035
+41036
+41037
+41038
+41039
+41040
+41041
+41042
+41043
+41044
+41045
+41046
+41047
+41048
+41049
+41050
+41051Push Button1 Pickup Hours
+Push Button1 Pickup Minutes0-23
+0-592 Bytes
+Push Button1 Pickup Seconds Push Button1 
+Pickup Milliseconds0-59
+0-992 Bytes
+Push Button1 DropOff  Hours
+Push Button1 DropOff Minutes0-23
+0-592 Bytes
+Push Button1 DropOff Seconds
+Push Button1 DropOff Milliseconds0-59
+0-992 Bytes
+Push Button2 Pickup Hours
+Push Button2 Pickup Minutes0-23
+0-592 Bytes
+Push Button2 Pickup Seconds
+Push Button2 Pickup Milliseconds0-59
+0-992 Bytes
+Push Button2 DropOff  Hours
+Push Button2 DropOff Minutes0-23
+0-592 Bytes
+Push Button2 DropOff Seconds
+Push Button2 DropOff Milliseconds0-59
+0-992 Bytes
+3.11 Digital Input Blocking:
+Address Register Name Range 
+(HEX)Register 
+SizeStepMultiplication 
+Factor
+Digital Input1 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input1 Pickup DI Block 0-7FFE2 Bytes--
+Digital Input1 Pickup Control Block 0-001F2 Bytes--
+Digital Input1 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input1 DropOff DI Block 0-7FFE2 Bytes--
+Digital Input1 DropOff Control Block 0-001F2 Bytes--
+Digital Input2 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input2 Pickup DI Block 0-7FFD2 Bytes--
+Digital Input2 Pickup Control Block 0-001F2 Bytes--
+Digital Input2 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input2 DropOff DI Block 0-7FFD2 Bytes--
+Digital Input2 DropOff Control Block 0-001F2 Bytes--
+Digital Input3 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input3 Pickup DI Block 0-7FFB2 Bytes--
+Digital Input3 Pickup Control Block 0-001F2 Bytes--
+Digital Input3 DropOff Protection Block 0-1FFF2 Bytes--
+Digital Input3 DropOff DI Block 0-7FFB2 Bytes--
+Digital Input3 DropOff Control Block 0-001F2 Bytes--
+Digital Input4 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input4 Pickup DI Block 0-7FF72 Bytes--
+Digital Input4 Pickup Control Block 0-001F2 Bytes--
+
+-- PAGE 23 --
+41052
+41053
+41054
+41055
+41056
+41057
+41058
+41059
+41060
+41061
+41062
+41063
+41064
+41065
+41066
+41067
+41068
+41069
+41070
+41071
+41072
+41073
+41074
+41075
+41076
+41077
+41078
+41079
+41080
+41081
+41082
+41083
+41084
+41085
+41086
+41087
+41088Digital Input4 DropOff Protection 0-1FFF2 Bytes--
+Block
+Digital Input4 DropOff DI Block 0-7FF72 Bytes--
+Digital Input4 DropOff Control Block 0-001F2 Bytes--
+Digital Input5 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input5 Pickup DI Block 0-7FEF2 Bytes--
+Digital Input5 Pickup Control Block 0-001F2 Bytes--
+Digital Input5 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input5 DropOff DI Block 0-7FEF2 Bytes--
+Digital Input5 DropOff Control Block 0-001F2 Bytes--
+Digital Input6 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input6 Pickup DI Block 0-7FDF2 Bytes--
+Digital Input6 Pickup Control Block 0-001F2 Bytes--
+Digital Input6 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input6 DropOff DI Block 0-7FDF2 Bytes--
+Digital Input6 DropOff Control Block 0-001F2 Bytes--
+Digital Input7 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input7 Pickup DI Block 0-7FBF2 Bytes--
+Digital Input7 Pickup Control Block 0-001F2 Bytes--
+Digital Input7 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input7 DropOff DI Block 0-7FBF2 Bytes--
+Digital Input7 DropOff Control Block 0-001F2 Bytes--
+Digital Input8 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input8 Pickup DI Block 0-7F7F2 Bytes--
+Digital Input8 Pickup Control Block 0-001F2 Bytes--
+Digital Input8 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input8 DropOff DI Block 0-7F7F2 Bytes--
+Digital Input8 DropOff Control Block 0-001F2 Bytes--
+Digital Input9 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input9 Pickup DI Block 0-7EFF2 Bytes--
+Digital Input9 Pickup Control Block 0-001F2 Bytes--
+Digital Input9 DropOff Protection Block 0-1FFF2 Bytes--
+Digital Input9 DropOff DI Block 0-7EFF2 Bytes--
+Digital Input9 DropOff Control Block 0-001F2 Bytes--
+Digital Input10 Pickup Protection
+Block0-1FFF2 Bytes--
+Digital Input10 Pickup DI Block 0-7DFF2 Bytes--
+Digital Input10 Pickup Control Block 0-001F2 Bytes--
+Digital Input10 DropOff Protection
+Block0-1FFF2 Bytes--
+
+-- PAGE 24 --
+41089
+41090
+41091
+41092
+41093
+41094
+41095
+41096
+41097
+41098
+41099
+41100
+41101
+41102
+41103
+41104
+41105
+41106
+41107
+41108
+41109
+41110
+41111
+41112
+41113
+41114
+41115
+41116
+41117
+41118
+41119
+41120
+41121
+41122
+41123Digital Input10 DropOff DI Block 0-7DFF2 Bytes--
+Digital Input10 DropOff Control Block 0-001F2 Bytes--
+Digital Input11 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input11 Pickup DI Block 0-7BFF2 Bytes--
+Digital Input11 Pickup Control Block 0-001F2 Bytes--
+Digital Input11 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input11 DropOff DI Block 0-7BFF2 Bytes--
+Digital Input11 DropOff Control Block 0-001F2 Bytes--
+Digital Input12 Pickup Protection
+Block0-1FFF2 Bytes--
+Digital Input12 Pickup DI Block 0-77FF2 Bytes--
+Digital Input12 Pickup Control Block 0-001F2 Bytes--
+Digital Input12 DropOff Protection Block 0-1FFF2 Bytes--
+Digital Input12 DropOff DI Block 0-77FF2 Bytes--
+Digital Input12 DropOff Control Block 0-001F2 Bytes--
+Digital Input13 Pickup Protection
+Block0-1FFF2 Bytes--
+Digital Input13 Pickup DI Block 0-6FFF2 Bytes--
+Digital Input13 Pickup Control Block 0-001F2 Bytes--
+Digital Input13 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input13 DropOff DI Block 0-6FFF2 Bytes--
+Digital Input13 DropOff Control Block 0-001F2 Bytes--
+Digital Input14 Pickup Protection Block 0-1FFF2 Bytes--
+Digital Input14 Pickup DI Block 0-5FFF2 Bytes--
+Digital Input14 Pickup Control Block 0-001F2 Bytes--
+Digital Input14 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input14 DropOff DI Block 0-5FFF2 Bytes--
+Digital Input14 DropOff Control Block 0-001F2 Bytes--
+Digital Input15 Pickup Protection
+Block0-1FFF2 Bytes--
+Digital Input15 Pickup DI Block 0-3FFF2 Bytes--
+Digital Input15 Pickup Control Block 0-001F2 Bytes--
+Digital Input15 DropOff Protection
+Block0-1FFF2 Bytes--
+Digital Input15 DropOff DI Block 0-3FFF2 Bytes--
+Digital Input15 DropOff Control Block 0-001F2 Bytes--
+Push Button1 Pickup Protection Block 0-1FFF2 Bytes--
+Push Button1 Pickup DI Block 0-7FFF2 Bytes--
+Push Button1 Pickup Control Block 0-001E2 Bytes--
+
+-- PAGE 25 --
+41124
+41125
+41126
+41127
+41128
+41129
+41130
+41131
+41132
+41133
+41134 1
+41135 1
+41136 1
+41137 1
+41138 1
+41139 1
+41140 1
+41141 1
+40219 1 1
+2 1
+40220 2 1
+1 1
+40221 2 1
+1 1
+40222 2 1
+40223 2 1
+40224 2 1
+40225 2 1
+40226 2 1
+40227 2 1
+40228 2 1
+40229 2 1
+40230 2 1Push Button1 DropOff Protection
+Block0-1FFF2 Bytes--
+Push Button1 DropOff DI Block 0-7FFF2 Bytes--
+Push Button1 DropOff Control Block 0-001D2 Bytes--
+Push Button2 Pickup Protection Block 0-1FFF2 Bytes--
+Push Button2 Pickup DI Block 0-7FFF2 Bytes--
+Push Button2 Pickup Control Block 0-001E2 Bytes--
+Push Button2 DropOff Protection
+Block0-1FFF2 Bytes--
+Push Button2 DropOff DI Block 0-7FFF2 Bytes--
+Push Button2 DropOff Control Block 0-001D2 Bytes--
+Digital Input Invert 0-07FF2 Bytes--
+3.12 LED STATUS:
+Address Register Name ValueRegister Size StepMultiplication
+Factor
+LED Status 1 0-2552 Bytes-
+LED Status 2 0-2552 Bytes-
+LED Status 3 0-2552 Bytes-
+Flash LED 1 0-2552 Bytes-
+Flash LED 2 0-2552 Bytes-
+Accept Value 0-2552 Bytes-
+Reset Value 0-2552 Bytes-
+Relay Status 0-1F2 Bytes-
+4 COMMANDS:
+Address Register Name ValueRegister Size StepMultiplication
+Factor
+Remote Trip 2 Bytes-
+Remote Close -
+Push Button 1 ON 2 Bytes-
+Push Button 1 OFF -
+Push Button 2 ON 2 Bytes-
+Push Button 2 OFF -
+Device Reset Remote 2 Bytes-
+Fault Record Clear Remote 2 Bytes-
+Event Record Clear Remote 2 Bytes-
+Trip Count Clear Remote 2 Bytes-
+I^2 Alarm Clear Remote 2 Bytes-
+KVA Clear 2 Bytes-
+KW Clear 2 Bytes-
+Outage Bus Clear 2 Bytes-
+Outage Load Clear 2 Bytes-
+
+-- PAGE 26 --
+40281 1
+1
+40282 1
+1
+40283 1
+1
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+41231 1
+41232 1
+41233 1
+41234 1
+41235 1
+41236 1
+41237 1
+1
+41238 1
+41239 1
+0.23 1
+41240 1
+1
+41241 1
+1
+41242 15 TIME SYNCHRONIZATION:
+AddressRegister Name RangeRegister 
+SizeStepMultiplication 
+Factor
+Present Seconds 0-591 Byte -
+Present Minutes 0-591 Byte -
+Present  Hours 0-231 Byte -
+Present Day 1-311 Byte -
+Present Month 1-121 Byte -
+Present Year 0-991 Byte -
+6 FAULT RECORD:
+Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+41201-41202R Phase Fault Current -4 Bytes-
+41203-41204Y Phase Fault Current -4 Bytes-
+41205-41206B Phase Fault Current -4 Bytes-
+41207-41208Earth Fault Current -4 Bytes-
+41209-41210Sensitive Earth Fault Current -4 Bytes-
+41211-41212I1 Positive Sequence Current -4 Bytes-
+41213-41214I2 Negative Sequence Current -4 Bytes-
+41215-41216I0 Zero Sequence Current -4 Bytes-
+41217-41218R Phase Fault Voltage -4 Bytes-
+41219-41220Y Phase Fault Voltage -4 Bytes-
+41221-41222B Phase Fault Voltage -4 Bytes-
+41223-41224Residual Fault Voltage -4 Bytes-
+41225-41226V1 Positive Sequence Voltage -4 Bytes-
+41227-41228V2 Negative Sequence Voltage -4 Bytes-
+41229-41230V0 Zero Sequence Voltage -4 Bytes-
+Current Start Element A2 Bytes-
+Current Trip Element B2 Bytes-
+Future -2 Bytes-
+Voltage Start Element C2 Bytes-
+Voltage Trip Element D2 Bytes-
+Residual Voltage Trip E2 Bytes-
+Auto Reclose Shots 1-41 Byte-
+Trip Group 1-101 Byte-
+Trip Time Milliseconds 0-9992 Bytes-
+Trip Time Minutes 0-591 Byte-
+Trip Time Hours 1 Byte-
+Trip Time Day 1-311 Byte-
+Trip Date Seconds 0-591 Byte-
+Trip Date Year 0-991 Byte-
+Trip Date Month 1-121 Byte-
+Fault Record Pointer -2 Bytes-
+
+-- PAGE 27 --
+1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+141243-41244Reclaim Time -4 Bytes-
+Trip Element Message:
+Current Start Element (Reg-41231):
+1-   Phase Curve Type
+2-   R_Ph_IDMT_Starter
+3-   Y_Ph_IDMT_Starter
+4-   B_Ph_IDMT_Starter
+5-   Phase Wideset Starter
+6-   R_Ph_Wideset Starter
+7-   Y_Ph_Wideset Starter
+A 8-   B_Ph_Wideset Starter
+9-   Phase IDMT Starter
+10- Earth Curve Type
+11- Earth IDMT Starter
+12- Earth Wideset Starter
+13- Phase Reset Starter
+14- Earth Reset Starter
+15- Auto Lockout
+16- SEF Starter
+Current Trip Element (Reg-41232):
+B1-   SEF Trip
+2-   R_Ph_IDMT_Trip
+3-   Y_Ph_IDMT_Trip
+4-   B_Ph_IDMT_Trip
+5-   Phase IDMT Trip
+6-   R_Ph_Wideset Trip
+7-   Y_Ph_Wideset Trip
+8-   B_Ph_Wideset Trip
+9-   Phase Wideset Trip
+10- R_Highset Trip
+11- Y_Highset Trip
+12- B_Highset Trip
+13- Trip Enable
+14- Earth IDMT Trip
+15- Earth Wideset Trip
+16- Earth Highset Trip
+Voltage Start Element (Reg-41234):
+C1-   Inv OV1 Type
+
+-- PAGE 28 --
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+45602 1
+45603 1
+45604 1
+45605 1C2-   Inv UV1 Type
+3-   RN_Inv_OV1_Starter
+4-   YN_Inv_OV1_Starter
+5-   BN_Inv_OV1_Starter
+6-   RN_Inv_UV1_Starter
+7-   YN_Inv_UV1_Starter
+8-   BN_Inv_UV1_Starter
+9-   RN_DTL_OV2_Starter
+10- YN_DTL_OV2_Starter
+11- BN_DTL_OV2_Starter
+12- RN_DTL_UV2_Starter
+13- YN_DTL_UV2_Starter
+14- BN_DTL_UV2_Starter
+15- NE_Inv_RV1_Starter
+16- Inv_RV1_Type
+Voltage Trip Element (Reg-41235):
+D1-   NE_DTL_RV2_Starter
+2-   OV_Rst_Starter
+3-   UV_Rst_Starter
+4-   RV_Rst_Starter
+5-   RN_Inv_OV1_Trip
+6-   YN_Inv_OV1_Trip
+7-   BN_Inv_OV1_Trip
+8-   RN_Inv_UV1_Trip
+9-   YN_Inv_UV1_Trip
+10- BN_Inv_UV1_Trip
+11- RN_DTL_OV2_Trip
+12- YN_DTL_OV2_Trip
+13- BN_DTL_OV2_Trip
+14- RN_DTL_UV2_Trip
+15- YN_DTL_UV2_Trip
+16- BN_DTL_UV2_Trip
+E 1-   NE_Inv_RV1_Trip
+2-   NE_DTL_RV2_Trip
+7 EVENT RECORD:
+Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+Event Record Pointer -2 Bytes-
+Event Register A -2 Bytes-
+Event Register B -2 Bytes-
+Event Register C -2 Bytes-
+
+-- PAGE 29 --
+45606 1
+45607 1
+45608 1
+45609 1
+45610 1
+45611 1
+45612 1
+45613 1
+45614 1
+45615 1
+45616 1
+45617 1
+45618 1
+45619 1
+45620 1
+45621 1
+45622 1
+45623 1
+45624 1
+45625 1
+45626 1
+45267 1
+45628 1
+45629 1
+45630 1
+1
+45631 1
+1
+45632 1
+1
+25001 1
+25002 1
+25003 1
+25004 1
+25005 1
+25006 1
+25007 1
+25008 1
+25009 1Event Register D -2 Bytes-
+Event Register E -2 Bytes-
+Event Register F -2 Bytes-
+Event Register G -2 Bytes-
+Event Register H -2 Bytes-
+Event Register I -2 Bytes-
+Event Register J -2 Bytes-
+Event Register K -2 Bytes-
+Event Register L -2 Bytes-
+Event Register M -2 Bytes-
+DropOff Event Register A -2 Bytes-
+DropOff Event Register B -2 Bytes-
+DropOff  Event Register C -2 Bytes-
+DropOff  Event Register D -2 Bytes-
+DropOff  Event Register E -2 Bytes-
+DropOff  Event Register F -2 Bytes-
+DropOff  Event Register G -2 Bytes-
+DropOff  Event Register H -2 Bytes-
+DropOff  Event Register I -2 Bytes-
+DropOff  Event Register J -2 Bytes-
+DropOff  Event Register K -2 Bytes-
+DropOff  Event Register L -2 Bytes-
+DropOff  Event Register M -2 Bytes-
+Event Time Milliseconds 0-9992 Bytes-
+Event Time Hours 0-231 Bytes-
+Event Time Minutes 0-591 Bytes-
+Event Date Seconds 0-591 Bytes-
+Event Time Day 1-311 Byte-
+Event Date Year 0-991 Byte-
+Event Date Month 1-121 Byte-
+45633-45634Future -4 Bytes--
+8 EVENTS:
+Address Register Name RangeRegister 
+SizeStepMultiplication 
+Factor
+Event Register A -2 Bytes-
+Event Register B -2 Bytes-
+Event Register C -2 Bytes-
+Event Register D -2 Bytes-
+Event Register E -2 Bytes-
+Event Register F -2 Bytes-
+Event Register G -2 Bytes-
+Event Register H -2 Bytes-
+Event Register I -2 Bytes-
+
+-- PAGE 30 --
+25010 1
+25011 1
+25012 1
+25013 1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16Event Register J -2 Bytes-
+Event Register K -2 Bytes-
+Event Register L -2 Bytes-
+Event Register M -2 Bytes-
+Event Register A:
+A1-   Phase Curve Type
+2-   R_Ph_IDMT_Starter
+3-   Y_Ph_IDMT_Starter
+4-   B_Ph_IDMT_Starter
+5-   Phase Wideset Starter
+6-   R_Ph_Wideset Starter
+7-   Y_Ph_Wideset Starter
+8-   B_Ph_Wideset Starter
+9-   Phase IDMT Starter
+10- Earth Curve Type
+11- Earth IDMT Starter
+12- Earth Wideset Starter
+13- Phase Reset Starter
+14- Earth Reset Starter
+15- Auto Lockout
+16- SEF Starter
+Event Register B:
+B1-   SEF Trip
+2-   R_Ph_IDMT_Trip
+3-   Y_Ph_IDMT_Trip
+4-   B_Ph_IDMT_Trip
+5-   Phase IDMT Trip
+6-   R_Ph_Wideset Trip
+7-   Y_Ph_Wideset Trip
+8-   B_Ph_Wideset Trip
+9-   Phase Wideset Trip
+10- R_Highset Trip
+11- Y_Highset Trip
+12- B_Highset Trip
+13- Trip Enable
+14- Earth IDMT Trip
+15- Earth Wideset Trip
+16- Earth Highset Trip
+Event Register C:
+
+-- PAGE 31 --
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8C1-   Inv OV1 Type
+2-   Inv UV1 Type
+3-   RN_Inv_OV1_Starter
+4-   YN_Inv_OV1_Starter
+5-   BN_Inv_OV1_Starter
+6-   RN_Inv_UV1_Starter
+7-   YN_Inv_UV1_Starter
+8-   BN_Inv_UV1_Starter
+9-   RN_DTL_OV2_Starter
+10- YN_DTL_OV2_Starter
+11- BN_DTL_OV2_Starter
+12- RN_DTL_UV2_Starter
+13- YN_DTL_UV2_Starter
+14- BN_DTL_UV2_Starter
+15- NE_Inv_RV1_Starter
+16- Inv_RV1_Type
+Event Register D:
+D1-   NE_DTL_RV2_Starter
+2-   OV_Rst_Starter
+3-   UV_Rst_Starter
+4-   RV_Rst_Starter
+5-   RN_Inv_OV1_Trip
+6-   YN_Inv_OV1_Trip
+7-   BN_Inv_OV1_Trip
+8-   RN_Inv_UV1_Trip
+9-   YN_Inv_UV1_Trip
+10- BN_Inv_UV1_Trip
+11- RN_DTL_OV2_Trip
+12- YN_DTL_OV2_Trip
+13- BN_DTL_OV2_Trip
+14- RN_DTL_UV2_Trip
+15- YN_DTL_UV2_Trip
+16- BN_DTL_UV2_Trip
+Event Register E:
+E1-   NE_Inv_RV1_Trip
+2-   NE_DTL_RV2_Trip
+3-   OV1 Trip
+4-   UV1 Trip
+5-   Power Flow Reverse
+6-   Power Flow Forward
+7-   RN_Input_Volt_ST
+8-   RN_Input_Volt_ST20
+
+-- PAGE 32 --
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15E9-   RN_Input_Volt_ST80
+10- YN_Input_Volt_ST
+11- YN_Input_Volt_ST20
+12- YN_Input_Volt_ST80
+13- BN_Input_Volt_ST
+14- BN_Input_Volt_ST20
+15- BN_Input_Volt_ST80
+16- RN_Output_Volt_ST
+Event Register F:
+1-   RN_Output_Volt_ST20
+2-   RN_Output_Volt_ST80
+3-   YN_Output_Volt_ST
+4-   YN_Output_Volt_ST20
+5-   YN_Output_Volt_ST80
+6-   BN_Output_Volt_ST
+7-   BN_Output_Volt_ST20
+F 8-   BN_Output_Volt_ST80
+9-   Supply Outage Source
+10- Supply Outage Load
+11- Rear device healthy
+12- Ph_Seq_Supervision
+13- Spare2_ST
+14- Spare3_ST
+15- Spare4_ST
+16- Spare5_ST
+Event Register G:
+G1-   AR_Reclaim_Stater
+2-   AR_PF_Dead1_Starter
+3-   AR_PF_Dead2_Starter
+4-   AR_PF_Dead3_Starter
+5-   AR_PF_Dead4_Starter
+6-   AR_EF_Dead1_Starter
+7-   AR_EF_Dead2_Starter
+8-   AR_EF_Dead3_Starter
+9-   AR_EF_Dead4_Starter
+10- AR_SEF_Dead1_Starter
+11- AR_SEF_Dead2_Starter
+12- AR_SEF_Dead3_Starter
+13- AR_SEF_Dead4_Starter
+14- AR_Unsuccess
+15- AR_Success
+
+-- PAGE 33 --
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4G
+16- Device_Restart
+Event Register H:
+H1-   Device Reset Local
+2-   Device Reset Remote
+3-   Setting Change Local
+4-   Setting Change Remote
+5-   Fault Record Clr Local
+6-   Fault Record Clr Remote
+7-   Event Record Clr Local
+8-   Event Record Clr Remote
+9-   Relay Test
+10- LED Test
+11- Trip Count Alarm
+12- I^2 Alarm
+13- Trip Count Alarm Local
+14- Trip Count Alarm Remote
+15- I^2 Alarm Clr Local
+16- I^2 Alarm Clr Remote
+Event Register I:
+I1-   PF_IDMT Block
+2-   EF_IDMT Block
+3-   PF Wideset Block
+4-   EF Wideset Block
+5-   PF Highset Block
+6-   EF Highset Block
+7-   OV_STG1_Block
+8-   OV_STG2_Block
+9-   UV_STG1_Block
+10- UV_STG2_Block
+11- Res.V_STG1_Block
+12- Res.V_STG2_Block
+13- SEF_Block
+14- AR Initialization
+15- Control Changed
+16- Spare2
+Event Register J:
+J1-   Digital Input1 Block
+2-   Digital Input2 Block
+3-   Digital Input3 Block
+4-   Digital Input4 Block
+
+-- PAGE 34 --
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11J5-   Digital Input5 Block
+6-   Digital Input6 Block
+7-   Digital Input7 Block
+8-   Digital Input8 Block
+9-   Digital Input9 Block
+10- Digital Input10 Block
+11- Digital Input11 Block
+12- Digital Input12 Block
+13- Digital Input13 Block
+14- Digital Input14 Block
+15- Digital Input15 Block
+16- Hot Line Tag
+Event Register K:
+1-   Push_Button1
+2-   Push_Button2
+3-   Block Close
+4-   Block Trip
+5-   Auto Reclose Block
+6-   Group Change
+7-   Manual Trip
+K 8-   Remote Trip
+9-   Local mode/Remote mode
+10- Dead line Active
+11- CBFB ST
+12- CBFB Trip
+13- Alarm Accept
+14- Trip lock
+15- AR L/R Time
+16- Manual Close
+Event Register L:
+L1-   DI1_pk_dp
+2-   DI2_pk_dp
+3-   DI3_pk_dp
+4-   DI4_pk_dp
+5-   DI5_pk_dp
+6-   DI6_pk_dp
+7-   DI7_pk_dp
+8-   DI8_pk_dp
+9-   DI9_pk_dp
+10- DI10_pk_dp
+11- DI11_pk_dp
+
+-- PAGE 35 --
+12
+13
+14
+15
+16
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16L
+12- DI12_pk_dp
+13- DI13_pk_dp
+14- DI14_pk_dp
+15- DI15_pk_dp
+16- PB1_pk_dp
+Event Register M:
+M1-   PB2_pk_dp
+2-   Device Healthy
+3-   DC Healthy
+4-   TCS
+5-   Breaker Status
+6-   Protection Healthy/UnHealthy
+7-   Spring Charge
+8-   Cold Load Raise
+9-   Cold Load Timer ON/OFF
+10- Device Restart
+11- EEPROM Error
+12- Outage Bus Clear
+13- Outage Line Clear
+14- Spare3
+15- KVA Demand Clear
+16- Remote Close
+
+
+-- PAGE 36 --
+
+
+-- PAGE 37 --
+Revision No                                       Changes                                                                                     Date
+0                                                         New Document                                                                   03/04/2018
+
+
+-- PAGE 38 --
+13/07/2018
+28/07/2018
+31/7/2018
+19/11/2018
+19/12/2019
+16/11/2020
+19/03/2022
+……………………………………… 6
+……………………………………… 8
+…………………………………… ..10
+
+-- PAGE 39 --
+0.001
+0.001…………………………………… ..11
+…………………………………… ..12
+…………………………………… ..12
+…………………………………… ..12
+…………………………………… ..12
+…………………………………… ..14
+                                                                                             17
+………………………………… ..…20
+…………………………………… ..23
+                                                                                                                                   23
+                                                                                                                 23
+                                                                                                                                24
+                                                                                                                               26
+                                                                                                                                           27
+The  communication  between  the  Master  and  Slave  (Relay)  is  established  using  the  following parameters. The following parameters 
+Multiplication 
+FactorAccess
+R
+R
+
+-- PAGE 40 --
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 41 --
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 42 --
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.001
+0.01
+1
+1
+1
+1
+1
+1
+1
+1
+0.001
+0.001
+0.001
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+Multiplication 
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 43 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R
+R
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 44 --
+1
+1
+0.001
+0.01Multiplication 
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 45 --
+1
+0.001
+1
+1
+1
+0.001
+0.01
+1
+0.001
+1
+1
+1
+0.01
+1
+0.01
+1
+1
+0.01
+0.01
+1
+0.01
+1
+1
+1
+0.01
+0.01
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 46 --
+0.01
+1
+1
+1
+0.01
+0.01
+1
+0.01
+1
+40406
+40446
+40486
+40526
+40566
+40606
+40646R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+SEF Set
+1-120 A
+5-500 A
+15-1500 A
+RES Stage1RES Stage2
+20-600V20-600V
+40-1200V40-1200V
+60-2000V60-2000V
+120-4000V120-4000V
+180-6000V180-6000V
+The above address values are for Group1 Settings of the Protection settings the Protection settings information for the other groups are 
+same as that of the Group1 except their address are different from Group1. The settings are of same order for all the Groups. The starting 
+Ending Address
+
+-- PAGE 47 --
+40686
+40726
+1
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+1
+1
+1
+1
+1
+1
+1
+1Multiplication 
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R_W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 48 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+0.01Multiplication 
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+Multiplication
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+Multiplication
+FactorAccess
+R-W
+R-W
+Multiplication
+FactorAccess
+R-W
+R-W
+
+-- PAGE 49 --
+1
+0.01
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+Multiplication
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 50 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 51 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1Multiplication 
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 52 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 53 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+We can set either one Yellow LED or one Red LED for a setting we cannot set both Yellow LED and Red LED for the same Setting
+
+-- PAGE 54 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1In this setting we can set both the Yellow and Red LED at the same time the values ranges from 0-255 for each Byte we can set all the eight 
+Multiplication
+FactorAccess
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 55 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 56 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+
+-- PAGE 57 --
+1
+1
+1
+1
+1
+1
+1
+1R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+R-W
+Multiplication 
+FactorAccess
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+
+-- PAGE 58 --
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+
+-- PAGE 59 --
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+
+-- PAGE 60 --
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+-R-W
+Multiplication
+FactorAccess
+R
+R
+R
+R
+R
+R
+R
+R
+Multiplication
+FactorAccess
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+W
+
+-- PAGE 61 --
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.01
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+0.0001
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1Access
+W
+W
+W
+W
+W
+W
+Multiplication 
+FactorAccess
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 62 --
+1R
+
+-- PAGE 63 --
+Access
+R
+R
+R
+R
+
+-- PAGE 64 --
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+Access
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 65 --
+R
+R
+R
+R
+
+-- PAGE 66 --
+
+
+-- PAGE 67 --
+
+
+-- PAGE 68 --
+
+
+-- PAGE 69 --
+
+
+-- PAGE 70 --
+
+
+-- PAGE 71 --
+40017 0.001
+40019 0.001
+40021 0.001
+40023 0.0001
+40025 0.0001
+40027 0.0001
+40029 0.0001
+40031 0.0001
+40033 0.0001
+40049 0.001
+40051 0.001
+40053 0.001
+40055 0.001
+40057 0.001
+40059 0.001
+40073 0.001
+40075 0.001
+40077 0.001
+40103 0.001
+40105 0.001
+40107 0.001
+40109 0.001
+40111 0.001
+40113 0.001
+40115 0.001
+40117 0.001
+40119 0.001
+40121 0.001
+40123 0.001
+40125 0.001
+40127 0.001
+40129 0.001
+40167 0.001
+40169 0.001
+40171 0.001
+40173 0.001
+40175 0.001
+40177 0.001
+40179 0.001
+40181 0.001
+40183 0.001
+40201 0.01
+40215 1
+40061 0.001
+40063 0.001AddressRegister Name RangeRegister 
+SizeStepMultiplication Factor
+R Phase Meter Current -4 Bytes-
+Y Phase Meter Current -4 Bytes-
+B Phase Meter Current -4 Bytes-
+R Phase L-N Voltage -4 Bytes-
+Y Phase L-N Voltage -4 Bytes-
+B Phase L-N Voltage -4 Bytes-
+RY Line-Line Voltage -4 Bytes-
+YB Line-Line Voltage -4 Bytes-
+BR Line-Line Voltage -4 Bytes-
+R Phase Reverse KW -4 Bytes-
+R Phase Forward KW -4 Bytes-
+Y Phase Reverse KW -4 Bytes-
+Y Phase Forward KW -4 Bytes-
+B Phase Reverse KW -4 Bytes-
+B Phase Forward KW -4 Bytes-
+R Phase Power Factor -4 Bytes-
+Y Phase Power Factor -4 Bytes-
+B Phase Power Factor -4 Bytes-
+Total KW Reverse -4Bytes-
+Total KW Forward -4 Bytes-
+Total KVA Reverse -4 Bytes-
+Total KVA Forward -4 Bytes-
+Total KVAR Reverse Lag -4 Bytes-
+Total KVAR Reverse Lead -4 Bytes-
+Total KVAR Forward Lag -4 Bytes-
+Total KVAR Forward Lead -4 Bytes-
+R Active Energy Reverse -4 Bytes-
+Y Active Energy Reverse -4 Bytes-
+B Active Energy Reverse -4 Bytes-
+R Active Energy Forward -4 Bytes-
+Y Active Energy Forward -4 Bytes-
+B Active Energy Forward -4 Bytes-
+Total Active Energy Reverse -4 Bytes-
+Total Active Energy Forward -4 Bytes-
+Total Apparent Energy Reverse -4 Bytes-
+Total Apparent Energy Forward -4 Bytes-
+Total KVARH Reverse Lead -4 Bytes-
+Total KVARH Reverse Lag -4 Bytes-
+Total KVARH Forward Lead -4 Bytes-
+Total KVARH Forward Lag -4 Bytes-
+Average Power Factor -4 Bytes-
+Frequency -4 Bytes-
+Auto Trip Count -4 Bytes-
+R Phase Reverse KVA -4 Bytes-
+R Phase Forward KVA -4 Bytes-
+
+-- PAGE 72 --
+40065 0.001
+40067 0.001
+40069 0.001
+40071 0.001
+40001 0.001
+40003 0.001
+40005 0.001
+40007 0.001
+40009 0.001
+40011 0.001
+40013 0.001
+40015 0.001
+40035 0.0001
+40037 0.0001
+40039 0.0001
+40041 0.0001
+40043 0.0001
+40045 0.0001
+40047 0.0001
+40079 0.001
+40081 0.001
+40083 0.001
+40085 0.001
+40087 0.001
+40089 0.001
+40091 0.001
+40093 0.001
+40095 0.001
+40097 0.001
+40099 0.001
+40101 0.001
+40131 0.001
+40133 0.001
+40135 0.001
+40137 0.001
+40139 0.001
+40141 0.001
+40143 0.001
+40145 0.001
+40147 0.001
+40149 0.001
+40151 0.001
+40153 0.001
+40155 0.001
+40157 0.001
+40159 0.001
+40161 0.001
+40163 0.001
+40165 0.001
+40185 0.001Y Phase Reverse KVA -4 Bytes-
+Y Phase Forward KVA -4 Bytes-
+B Phase Reverse KVA -4 Bytes-
+B Phase Forward KVA -4 Bytes-
+R Phase Protection Current -4 Bytes-
+Y Phase Protection Current -4 Bytes-
+B Phase Protection Current -4 Bytes-
+Earth Current -4 Bytes-
+Sensitive Earth Fault Current -4 Bytes-
+I1 Current-Positive Sequence -4 Bytes-
+I2 Current-Negative Sequence -4 Bytes-
+I0 Current-Zero Sequence -4 Bytes-
+Residual Voltage -4 Bytes-
+V1 Voltage-Positive Sequence -4 Bytes-
+V2 Voltage-Negative Sequence -4 Bytes-
+V0 Voltage-Zero Sequence -4 Bytes-
+R Phase L-N Output Voltage -4 Bytes-
+Y Phase L-N Output Voltage -4 Bytes-
+B Phase L-N Output Voltage -4 Bytes-
+R Phase KVAR Reverse Lag -4 Bytes-
+R Phase KVAR Reverse Lead -4 Bytes-
+R Phase KVAR Forward Lag -4 Bytes-
+R Phase KVAR Forward Lead -4 Bytes-
+Y Phase KVAR Reverse Lag -4 Bytes-
+Y Phase KVAR Reverse Lead -4 Bytes-
+Y Phase KVAR Forward Lag -4 Bytes-
+Y Phase KVAR Forward Lead -4 Bytes-
+B Phase KVAR Reverse Lag -4 Bytes-
+B Phase KVAR Reverse Lead -4 Bytes-
+B Phase KVAR Forward Lag -4 Bytes-
+B phase KVAR Forward Lead -4 Bytes-
+R Apparent Energy Reverse -4 Bytes-
+Y Apparent Energy Reverse -4 Bytes-
+B Apparent Energy Reverse -4 Bytes-
+R Apparent Energy Forward -4 Bytes-
+Y Apparent Energy Forward -4 Bytes-
+B Apparent Energy Forward -4 Bytes-
+R KVARH Reverse Lead -4 Bytes-
+Y KVARH Reverse Lead -4 Bytes-
+B KVARH Reverse Lead -4 Bytes-
+R KVARH Reverse Lag -4 Bytes-
+Y KVARH Reverse Lag -4 Bytes-
+B KVARH Reverse Lag -4 Bytes-
+R KVARH Forward Lead -4 Bytes-
+Y KVARH Forward Lead -4 Bytes-
+B KVARH Forward Lead -4 Bytes-
+R KVARH Forward Lag -4 Bytes-
+Y KVARH Forward Lag -4 Bytes-
+B KVARH Forward Lag -4 Bytes-
+MD Apparent Power Reverse -4 Bytes-
+
+-- PAGE 73 --
+40187 0.001
+40189 0.001
+40191 0.001
+40193 0.001
+40195 0.001
+40197 0.001
+40199 0.001
+40203 1
+40205 1
+40207 1
+40209 1
+40211 1
+40213 1
+40217 1
+25024 0.001
+25026 0.001
+25028 0.001MD Apparent Power Forward -4 Bytes-
+MD Active Power Reverse -4 Bytes-
+MD Active Power Forward -4 Bytes-
+Cumulative MD KVA Reverse -4 Bytes-
+Cumulative MD KVA Forward -4 Bytes-
+Cumulative MD KW Reverse -4 Bytes-
+Cumulative MD KW Forward -4 Bytes-
+Last Outage  Bus Days-2 
+Bytes,Hours,Minutes-4Bytes-
+Total Outage Bus Days-2 
+Bytes,Hours,Minutes-4 Bytes-
+Last Outage  Load  Days-2
+Bytes,Hours,Minutes-4Bytes-
+Total Outage Load  Days-2
+Bytes,Hours,Minutes-4 Bytes-
+Outage Count Bus -4 Bytes-
+Outage Count Load -4 Bytes-
+Sum Of I^2 Alarm -4 Bytes-
+3Ph Total KW -4 Bytes-
+3Ph Total KVAR -4 Bytes-
+3Ph Total KVA -4 Bytes-
+
+-- PAGE 74 --
+Access
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 75 --
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+
+-- PAGE 76 --
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+R
+

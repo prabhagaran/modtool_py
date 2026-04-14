@@ -22,6 +22,7 @@ DEFAULT_UNIT_ID  = "1"
 # ── Drop-down options ─────────────────────────────────────────────────────────
 BAUDRATES   = ["1200", "2400", "4800", "9600", "19200", "38400", "57600", "115200"]
 PARITIES    = ["N - None", "E - Even", "O - Odd"]
+PARITY_MAP  = {"N - None": "N", "E - Even": "E", "O - Odd": "O"}
 STOP_BITS   = ["1", "1.5", "2"]
 BYTE_SIZES  = ["7", "8"]
 

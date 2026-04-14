@@ -21,7 +21,7 @@ from datetime import datetime
 
 import dearpygui.dearpygui as dpg
 
-from config.defaults import HEADER_COLOR, TX_COLOR, RX_COLOR, ERR_COLOR, INFO_COLOR
+from config.defaults import HEADER_COLOR, TX_COLOR, RX_COLOR, ERR_COLOR, INFO_COLOR, LOG_DIR
 from utils.logger    import logger
 from utils import gui_queue
 
@@ -136,9 +136,9 @@ def _on_save(sender, app_data, user_data) -> None:
     entries = logger.get_entries()
     if not entries:
         return
-    os.makedirs("logs", exist_ok=True)
+    os.makedirs(LOG_DIR, exist_ok=True)
     ts   = datetime.now().strftime("%Y%m%d_%H%M%S")
-    path = os.path.join("logs", f"debug_export_{ts}.txt")
+    path = os.path.join(LOG_DIR, f"debug_export_{ts}.txt")
     try:
         with open(path, "w", encoding="utf-8") as fh:
             fh.write("# ModTool Debug Export\n")

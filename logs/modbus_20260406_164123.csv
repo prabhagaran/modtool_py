@@ -1,2 +1,10 @@
 Timestamp,Direction,Frame,Parsed,Status
 16:41:23.735,INF,Session started – logs → logs\modbus_20260406_164123.*,,OK
+16:41:38.275,ERR,TCP connection failed → 192.168.1.1:502,,ERROR
+16:42:50.979,ERR,TCP connection failed → 192.168.1.27:502,,ERROR
+17:01:00.585,ERR,TCP connection failed → 192.168.1.150:502,,ERROR
+17:01:28.046,ERR,TCP connection failed → 192.168.1.152:502,,ERROR
+17:02:06.060,ERR,TCP connection failed → 192.168.202.17:502,,ERROR
+17:02:11.223,ERR,TCP connection failed → 192.168.202.17:502,,ERROR
+17:02:42.930,ERR,TCP connection failed → 192.168.202.17:1502,,ERROR
+17:05:28.575,ERR,TCP connection failed → 192.168.202.16:502,,ERROR

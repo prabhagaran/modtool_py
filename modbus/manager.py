@@ -39,7 +39,8 @@ class ModbusManager:
         self._slave_id = 1
 
         # Callbacks (set by GUI)
-        self._response_cb = None  # fn(result: dict)
+        self._response_cb     = None  # fn(result: dict)
+        self._poll_stopped_cb = None  # fn() – called when poll exits unexpectedly
 
         # Auto-poll state
         self._poll_active   = False
@@ -58,6 +59,10 @@ class ModbusManager:
     def mode(self) -> str:
         return self._mode
 
+    @property
+    def slave_id(self) -> int:
+        return self._slave_id
+
     # ── Configuration ─────────────────────────────────────────────────────────
 
     def set_mode(self, mode: str) -> None:
@@ -66,6 +71,17 @@ class ModbusManager:
     def set_response_callback(self, fn) -> None:
         """Register *fn(result: dict)* – called after every completed operation."""
         self._response_cb = fn
+
+    def set_poll_stopped_callback(self, fn) -> None:
+        """Register *fn()* – called when the poll loop exits (e.g. on disconnect)."""
+        self._poll_stopped_cb = fn
+
+    def fire_error(self, message: str) -> None:
+        """Push an error result through the response callback."""
+        result = dict(raw_hex="", parsed="", values=[],
+                      error=message, is_error=True)
+        if self._response_cb:
+            self._response_cb(result)
 
     # ── Connection ────────────────────────────────────────────────────────────
 
@@ -188,6 +204,9 @@ class ModbusManager:
             deadline = time.monotonic() + self._poll_interval
             while self._poll_active and time.monotonic() < deadline:
                 time.sleep(0.05)
+        # Notify the GUI if the loop exited due to a connection drop
+        if not self.connected and self._poll_stopped_cb:
+            self._poll_stopped_cb()
 
 
 # ── Module-level singleton ────────────────────────────────────────────────────

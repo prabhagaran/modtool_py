@@ -1,0 +1,3 @@
+Timestamp,Direction,Frame,Parsed,Status
+12:40:34.650,INF,Session started – logs → logs\modbus_20260410_124034.*,,OK
+14:57:17.315,INF,Disconnected,,OK

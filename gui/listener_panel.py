@@ -32,6 +32,7 @@ from config.defaults import (
     HEADER_COLOR, OK_COLOR, ERR_COLOR, WARN_COLOR,
     DIM_COLOR, TX_COLOR, RX_COLOR,
     BAUDRATES, PARITIES, STOP_BITS, BYTE_SIZES,
+    PARITY_MAP,
     LOG_DIR,
 )
 from utils import gui_queue
@@ -68,7 +69,6 @@ _FC_NAMES = {
     15: "Write Multiple Coils",
     16: "Write Multiple Registers",
 }
-_PARITY_MAP = {"N - None": "N", "E - Even": "E", "O - Odd": "O"}
 
 
 # ── Shared helpers ───────────────────────────────────────────────────────────
@@ -514,7 +514,7 @@ def _start_rtu() -> None:
 
     com      = dpg.get_value("lst_rtu_com")
     baudrate = int(dpg.get_value("lst_rtu_baud"))
-    parity   = _PARITY_MAP.get(dpg.get_value("lst_rtu_parity"), "N")
+    parity   = PARITY_MAP.get(dpg.get_value("lst_rtu_parity"), "N")
     stopbits = float(dpg.get_value("lst_rtu_stopbits"))
     bytesize = int(dpg.get_value("lst_rtu_bytesize"))
 

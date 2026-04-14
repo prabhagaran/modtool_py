@@ -20,6 +20,7 @@ from config.defaults import (
 )
 from modbus.manager import manager
 from utils.logger   import logger
+from utils          import gui_queue
 
 
 _LABEL_W = 130   # fixed label column width (px)
@@ -107,6 +108,11 @@ def build() -> None:
         dpg.add_button(tag="btn_send", label="  ▶  SEND COMMAND  ",
                        callback=_on_send, width=-1, height=38)
 
+    # Register poll-stopped callback so the checkbox resets on connection drop
+    manager.set_poll_stopped_callback(
+        lambda: gui_queue.post(_reset_poll_ui)
+    )
+
 
 # ── Callbacks ─────────────────────────────────────────────────────────────────
 
@@ -128,11 +134,7 @@ def _on_fc_change(sender, app_data, user_data) -> None:
 
 def _on_send(sender, app_data, user_data) -> None:
     if not manager.connected:
-        # Push error to response panel via the manager's callback
-        err_result = dict(raw_hex="", parsed="", values=[],
-                         error="Not connected – connect first.", is_error=True)
-        if manager._response_cb:
-            manager._response_cb(err_result)
+        manager.fire_error("Not connected – connect first.")
         logger.log_error("Send attempted while not connected")
         return
     threading.Thread(target=_do_send, daemon=True,
@@ -155,9 +157,7 @@ def _do_send() -> None:
                         data_type=dtype)
     except ValueError as exc:
         logger.log_error(f"Input validation: {exc}")
-        if manager._response_cb:
-            manager._response_cb(dict(raw_hex="", parsed="", values=[],
-                                      error=str(exc), is_error=True))
+        manager.fire_error(str(exc))
     except Exception as exc:
         logger.log_error(f"Send error: {exc}")
 
@@ -181,11 +181,16 @@ def _start_poll() -> None:
     dtype    = dpg.get_value("cmd_dtype")
     interval = int(dpg.get_value("poll_interval"))
     manager.start_polling(fc, address, quantity,
-                          manager._slave_id, interval, dtype)
+                          manager.slave_id, interval, dtype)
     logger.log_info(f"Auto-poll started: FC{fc:02d} @ {address}, every {interval} ms")
 
 
 # ── Utility ───────────────────────────────────────────────────────────────────
+def _reset_poll_ui() -> None:
+    """Called (on the main thread) when the poll loop exits due to a
+    connection drop, so the Enable checkbox reflects the real state."""
+    dpg.set_value("poll_enable", False)
+    logger.log_info("Auto-poll stopped (connection lost)")
 
 def _parse_fc(text: str) -> int:
     """Extract integer function code from e.g. '03  –  Read Holding Registers'."""

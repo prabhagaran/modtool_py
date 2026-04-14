@@ -7,6 +7,18 @@ All functions are pure (no side-effects, no imports from this project).
 import struct
 
 
+# ── CRC-16 (Modbus RTU) ────────────────────────────────────────────────────
+
+def _crc16_modbus(data: bytes) -> int:
+    """Compute the Modbus RTU CRC-16 checksum."""
+    crc = 0xFFFF
+    for byte in data:
+        crc ^= byte
+        for _ in range(8):
+            crc = (crc >> 1) ^ 0xA001 if crc & 0x0001 else crc >> 1
+    return crc
+
+
 # ── Register → host type ──────────────────────────────────────────────────────
 
 def registers_to_uint16(registers: list) -> list:
@@ -70,9 +82,9 @@ def value_to_registers(value, data_type: str = "UINT16") -> list:
 def build_rtu_tx_bytes(slave_id: int, fc: int, address: int,
                        count: int = None, values: list = None) -> bytes:
     """
-    Build the RTU PDU+ADU bytes (slave | fc | data).
-    CRC is appended as 0x?? placeholders (two zero bytes) since the
-    actual CRC is computed by pymodbus at transport level.
+    Build the RTU PDU+ADU bytes (slave | fc | data | CRC).
+    The real CRC-16 is computed and appended so the debug log matches
+    the exact bytes pymodbus puts on the wire.
     """
     buf = bytearray([slave_id & 0xFF, fc & 0xFF,
                      (address >> 8) & 0xFF, address & 0xFF])
@@ -81,10 +93,16 @@ def build_rtu_tx_bytes(slave_id: int, fc: int, address: int,
         if count is not None:
             buf += bytearray([(count >> 8) & 0xFF, count & 0xFF])
     else:
-        for v in values:
-            v = int(v) & 0xFFFF
+        if fc == 5:
+            # FC05 Write Single Coil: Modbus ON=0xFF00, OFF=0x0000
+            v = 0xFF00 if (values[0] if isinstance(values[0], bool) else bool(int(values[0]))) else 0x0000
             buf += bytearray([(v >> 8) & 0xFF, v & 0xFF])
-    buf += bytearray([0x00, 0x00])   # CRC placeholder
+        else:
+            for v in values:
+                v = int(v) & 0xFFFF
+                buf += bytearray([(v >> 8) & 0xFF, v & 0xFF])
+    crc = _crc16_modbus(bytes(buf))
+    buf += bytearray([crc & 0xFF, (crc >> 8) & 0xFF])
     return bytes(buf)
 
 
@@ -98,9 +116,14 @@ def build_tcp_tx_bytes(unit_id: int, fc: int, address: int,
         if count is not None:
             pdu += bytearray([(count >> 8) & 0xFF, count & 0xFF])
     else:
-        for v in values:
-            v = int(v) & 0xFFFF
+        if fc == 5:
+            # FC05 Write Single Coil: Modbus ON=0xFF00, OFF=0x0000
+            v = 0xFF00 if (values[0] if isinstance(values[0], bool) else bool(int(values[0]))) else 0x0000
             pdu += bytearray([(v >> 8) & 0xFF, v & 0xFF])
+        else:
+            for v in values:
+                v = int(v) & 0xFFFF
+                pdu += bytearray([(v >> 8) & 0xFF, v & 0xFF])
     length = len(pdu) + 1          # +1 for unit_id
     mbap = bytearray([
         (transaction_id >> 8) & 0xFF, transaction_id & 0xFF,

@@ -7,7 +7,7 @@ import threading
 from pymodbus.client import ModbusTcpClient
 from pymodbus.exceptions import ModbusException, ConnectionException
 
-from modbus.rtu_client import _dispatch
+from modbus._dispatch import _dispatch
 
 
 class TCPClient:

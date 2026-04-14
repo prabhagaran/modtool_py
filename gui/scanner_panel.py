@@ -25,9 +25,11 @@ from pymodbus.exceptions import ModbusException, ConnectionException
 from config.defaults import (
     HEADER_COLOR, OK_COLOR, ERR_COLOR, DIM_COLOR, WARN_COLOR,
     BAUDRATES, PARITIES, STOP_BITS, BYTE_SIZES,
+    PARITY_MAP,
     LOG_DIR,
 )
 from utils import gui_queue
+from utils.converter import build_tcp_tx_bytes
 
 
 # ── COM port enumeration ──────────────────────────────────────────────────────────
@@ -53,17 +55,9 @@ _FC_NAMES = {
     5: "Write Single Coil", 6: "Write Single Register",
     15: "Write Multiple Coils", 16: "Write Multiple Registers",
 }
-_PARITY_MAP = {"N - None": "N", "E - Even": "E", "O - Odd": "O"}
 
 
 # ── TCP raw FC03 probe ────────────────────────────────────────────────────────
-
-def _build_tcp_request(unit_id: int) -> bytes:
-    """Build a Modbus TCP FC03 frame: read 1 holding register at address 0."""
-    return struct.pack(">HHHBBHH",
-        0x0001, 0x0000, 0x0006, unit_id, 0x03, 0x0000, 0x0001,
-    )
-
 
 def _probe_tcp(host: str, port: int, unit_id: int, timeout: float) -> tuple:
     """Returns (host, port, unit_id, ok: bool, detail: str)."""
@@ -71,7 +65,7 @@ def _probe_tcp(host: str, port: int, unit_id: int, timeout: float) -> tuple:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(timeout)
             s.connect((host, port))
-            s.sendall(_build_tcp_request(unit_id))
+            s.sendall(build_tcp_tx_bytes(unit_id, 3, 0, count=1, transaction_id=1))
             data = s.recv(256)
 
         if len(data) < 8:
@@ -501,7 +495,7 @@ def _run_rtu_scan() -> None:
 
     com      = dpg.get_value("scan_rtu_com")
     baudrate = int(dpg.get_value("scan_rtu_baud"))
-    parity   = _PARITY_MAP.get(dpg.get_value("scan_rtu_parity"), "N")
+    parity   = PARITY_MAP.get(dpg.get_value("scan_rtu_parity"), "N")
     stopbits = float(dpg.get_value("scan_rtu_stopbits"))
     bytesize = int(dpg.get_value("scan_rtu_bytesize"))
     timeout  = dpg.get_value("scan_rtu_timeout")
